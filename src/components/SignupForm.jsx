@@ -8,6 +8,7 @@ const SignupForm = (props) => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: '',
+        username: '',
         email: '',
         password: '',
         passwordConf: ''
@@ -26,20 +27,25 @@ const SignupForm = (props) => {
         //add in handle login/signup 
         navigate('/login')
       } catch (error) {
-        props.updateMessage(err.message)
+        console.error("Error during signup:", error)
+        const errorMessage = error.message ||
+        props.updateMessage(errorMessage)
       }
     }
 
     //destructure formData
-    const {name,email,password, passwordConf} = formData
+    const {name,username, email,password, passwordConf} = formData
     
     const isFormValid = () =>{
-      return !(name && email && password && password === passwordConf)
+      return !(name && username && email && password && password === passwordConf)
     }
     return (
       <form autoComplete='off' onSubmit={handleSubmit}>
         <div>
           <input type='text' autoComplete='off' id='name' value={name} name='name' onChange={handleChange} placeholder='Name'/>          
+        </div>
+        <div>
+          <input type='text' autoComplete='off' id='username' value={username} name='username' onChange={handleChange} placeholder='Username'/>          
         </div>
         <div>
           <input type='text' autoComplete='off' id='email' value={email} name='email' onChange={handleChange} placeholder='Email'/>          
