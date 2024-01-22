@@ -23,7 +23,7 @@ const App = () => {
   }
   return (
     <>
-      <Nav user={user} handleLogout={handleLogout}/>
+      <Nav user={user} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="/login" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
