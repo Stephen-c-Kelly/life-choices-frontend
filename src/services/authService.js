@@ -27,12 +27,16 @@ async function login(credentials){
         if (json.token){
             tokenService.setToken(json.token)
         }
-        if(json.err){
-            throw new Error(json.err)
+        if(json.error){
+            throw new Error(json.error)
         }
     } catch (error) {
-        console.log(error)
-        throw error
+        //add this if section so i can grab the error from the back end
+        if (error.response && error.response.data && error.response.data.error){
+        throw Error(error.response.data.error)
+        } else {
+            throw new Error('An error occurred')
+        }
     }
 }
 

@@ -12,7 +12,8 @@ const Login = (props) => {
   return (
     <div>
         <h1>Login</h1>
-        <LoginForm {...props} updateMessage={updateMessage} />
+        {/* add the error message as a prop so the login form can use it */}
+        <LoginForm {...props} updateMessage={updateMessage} errorMessage={message}/>
     </div>
   )
 }
