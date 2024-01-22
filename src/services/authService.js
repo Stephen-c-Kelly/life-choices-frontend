@@ -8,9 +8,21 @@ async function singup(user){
             throw new Error(json.err)
         }
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
 
-export { singup, }
+
+async function login(credentials){
+    try {
+        const res = await axios.post('http://localhost:3000/users', credentials)
+        const json = res.data
+        if(json.err){
+            throw new Error(json.err)
+        }
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+export { singup, login}
