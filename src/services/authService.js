@@ -1,9 +1,17 @@
-//will start without auth and once we get it working in the backen will add it in
+import * as tokenService from './tokenService.js'
+
+function getUser(){
+    return tokenService.getUserFromToken()
+}
 
 async function singup(user){
     try {
-        const res = await axios.post('http://localhost:3000/users', user)
+        const res = await axios.post('http://localhost:3000/signup', user)
         const json = res.data
+        if(json.token){
+            tokenService.setToken(json.token)
+            return json.token
+        }
         if (json.err) {
             throw new Error(json.err)
         }
@@ -15,7 +23,7 @@ async function singup(user){
 
 async function login(credentials){
     try {
-        const res = await axios.post('http://localhost:3000/users', credentials)
+        const res = await axios.post('http://localhost:3000/signin', credentials)
         const json = res.data
         if(json.err){
             throw new Error(json.err)
@@ -25,4 +33,8 @@ async function login(credentials){
         throw error
     }
 }
-export { singup, login}
+
+function logout(){
+    tokenService.removeToken()
+}
+export { singup, login, getUser, logout}
