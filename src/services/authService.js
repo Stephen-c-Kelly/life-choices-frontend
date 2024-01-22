@@ -9,7 +9,6 @@ async function singup(user){
         const res = await axios.post('http://localhost:3000/signup', user)
         const json = res.data
         if(json.token){
-            tokenService.setToken(json.token)
             return json.token
         }
         if (json.err) {
@@ -24,7 +23,10 @@ async function singup(user){
 async function login(credentials){
     try {
         const res = await axios.post('http://localhost:3000/signin', credentials)
-        const json = res.data
+        const json = await res.data
+        if (json.token){
+            tokenService.setToken(json.token)
+        }
         if(json.err){
             throw new Error(json.err)
         }
