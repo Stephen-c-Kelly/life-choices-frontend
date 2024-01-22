@@ -1,7 +1,7 @@
 import ProfileComponent from "../components/ProfileComponent";
 
 
-const Profile = () => {
+const Profile = (props) => {
   return (
     <div><ProfileComponent/></div>
   )

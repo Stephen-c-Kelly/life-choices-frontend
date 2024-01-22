@@ -1,6 +1,8 @@
-const ProfileComponent = () => {
+const ProfileComponent = (props) => {
     return (
-      <div>Profile</div>
+      <div>Profile
+
+      </div>
     )
   }
   
