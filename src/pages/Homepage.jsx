@@ -1,9 +1,9 @@
 
 
-const Landing = () => {
+const Homepage = () => {
     return (
-      <div>Landing</div>
+      <div>Homepage</div>
     )
   }
   
-  export default Landing
+  export default Homepage

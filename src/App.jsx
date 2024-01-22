@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import Landing from './pages/Landing'
+import Homepage from './pages/Homepage.jsx'
 import Nav from './components/Nav'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
@@ -25,7 +25,7 @@ const App = () => {
     <>
       <Nav user={user} handleLogout={handleLogout}/>
       <Routes>
-        <Route path="/" element={<Landing/>}/>
+        <Route path="/" element={<Homepage/>}/>
         <Route path="/login" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/profile" element={<Profile/>}/>
