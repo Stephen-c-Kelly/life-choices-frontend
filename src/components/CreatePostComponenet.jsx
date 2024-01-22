@@ -1,13 +1,13 @@
 import * as protectedServices from '../services/protectedServices.js'
-import * as authService from '../services/authService.js'
 
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { useState } from "react"
 
 const CreatePost = () => {
+    const navigate = useNavigate()
+    //took image out for now
     const [formData, setFormData] = useState({
         title: '',
-        img: '',
         content: '',
         choice1: '',
         choice2: '',
@@ -19,9 +19,11 @@ const CreatePost = () => {
     const handleSubmit = async e =>{
         e.preventDefault()
         try {
-            
+            protectedServices.createPost(formData)
+            console.log(formData)
+            navigate('/')
         } catch (error) {
-            
+            throw error
         }
     }
 

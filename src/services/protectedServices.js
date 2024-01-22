@@ -13,10 +13,11 @@ async function getUserProfile(){
     }
 }
 
-async function createPost(){
+async function createPost(updateInfo){
     try {
-        const res = await axios.post('http://localHost:300/posts',{title: title, img: img, content: content, choice1: choice1, choice2: choice2},{
+        const res = await axios.post('http://localHost:3000/posts',updateInfo,{
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+            console.log('create post')
     } catch (error) {
         throw Error(error)
         
