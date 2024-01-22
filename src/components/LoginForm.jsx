@@ -46,7 +46,7 @@ const LoginForm = (props) => {
       </div>
       <div>
         <input
-            type="text"
+            type="password"
             autoComplete="off"
             id="password"
             value={formData.password}
