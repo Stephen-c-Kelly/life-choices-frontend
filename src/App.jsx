@@ -7,6 +7,7 @@ import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 import * as authService from './services/authService.js'
 import './App.css'
+import CreatePost from './pages/CreatePost.jsx'
 
 const App = () => {
   const navigate = useNavigate()
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/login" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/newpost" element={<CreatePost/>}/>
       </Routes>
     </>
   )
