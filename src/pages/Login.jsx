@@ -2,7 +2,7 @@ import LoginForm from "../components/LoginForm"
 
 import { useState } from "react"
 
-const Login = () => {
+const Login = (props) => {
   const [message, setMessage] = useState([''])
 
   const updateMessage = msg => {
@@ -12,7 +12,7 @@ const Login = () => {
   return (
     <div>
         <h1>Login</h1>
-        <LoginForm updateMessage={updateMessage} />
+        <LoginForm {...props} updateMessage={updateMessage} />
     </div>
   )
 }

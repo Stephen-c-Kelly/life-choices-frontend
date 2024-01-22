@@ -5,7 +5,7 @@ import Nav from './components/Nav'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
-
+import * as authService from './services/authService.js'
 import './App.css'
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
   const [user, setUser] = useState(authService.getUser())
 
   function handleLogout(){
-    autherService.logout()
+    authService.logout()
     setUser(null)
     navigate('/')
   }
