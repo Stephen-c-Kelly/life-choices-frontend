@@ -17,7 +17,7 @@ const App = () => {
   function handleLogout() {
     authService.logout()
     setUser(null)
-    navigate('/login'); // Update this line to navigate to '/login' instead of '/'
+
   }
 
   function handleSignupOrLogin() {
