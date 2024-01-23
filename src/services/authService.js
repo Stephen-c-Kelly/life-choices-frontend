@@ -42,5 +42,6 @@ async function login(credentials){
 
 function logout(){
     tokenService.removeToken()
+    
 }
 export { singup, login, getUser, logout}
