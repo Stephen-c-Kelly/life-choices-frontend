@@ -59,6 +59,10 @@ const LoginForm = (props) => {
       <div>
         <button>Log In</button>
       </div>
+      <div>
+        <p>Or Sign Up using this link <Link to="/signup"> Register</Link>
+        </p>
+      </div>
       {/* this makes the error message appear*/}
       {props.errorMessage && <p className="error">{props.errorMessage}</p>}
     </form>
