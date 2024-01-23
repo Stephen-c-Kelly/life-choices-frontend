@@ -8,25 +8,27 @@ const ViewPostComponent = () => {
   useEffect(()=>{
     const fetchPosts = async () =>{
       const postsData = await protectedServices.getPosts()
-      console.log(postsData)
-      setDisplay(postsData)
+      const singlepost = postsData.allPosts
+      setDisplay(singlepost)
     }
-    fetchPosts
+    fetchPosts()
   }, [])
-
+  
   return (
     <div>
-      {display.length ? 
-      <>
-      {display.map(posts =>{
-        <p key={posts.id}>{posts.title}</p>
-      }
-      )}
-      </>:
-      <p>No Posts</p>
-      }
+   {display.length ? 
+  <>
+  {display.map(post =>
+  <p key={post._id}>{post.title}</p>
+  )}
+  </>:
+  <p>No Posts</p>
+  }
     </div>
   )
 }
 
 export default ViewPostComponent
+
+
+
