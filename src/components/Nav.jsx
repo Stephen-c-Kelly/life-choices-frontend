@@ -8,7 +8,7 @@ const Nav = () => {
   const hiddenPaths = ['/login', '/signup'];
 
   // Check if the current path is in the hiddenPaths array
-  const isHidden = hiddenPaths.includes(location.pathname);
+  const isHidden = hiddenPaths.includes(location.pathname)
 
   // If the Nav should be hidden, return null
   if (isHidden) {

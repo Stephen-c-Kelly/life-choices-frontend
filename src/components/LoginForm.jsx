@@ -59,6 +59,8 @@ const LoginForm = (props) => {
       <div>
         <button>Log In</button>
       </div>
+      {/* this makes the error message appear*/}
+      {props.errorMessage && <p className="error">{props.errorMessage}</p>}
     </form>
   )
 }
