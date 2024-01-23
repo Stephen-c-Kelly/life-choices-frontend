@@ -1,9 +1,9 @@
 import { async } from 'q'
 import * as tokenService from './tokenService'
 
-async function getUserProfile(username){
+async function getUserProfile(){
     try {
-        const res = await axios.get(`http://localhost:3000/profiles/${username}`, {
+        const res = await axios.get('http://localhost:3000/profiles', {
         headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
         return await res.json()
     } catch (error) {
