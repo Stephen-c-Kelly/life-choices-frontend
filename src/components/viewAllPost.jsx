@@ -1,3 +1,4 @@
+
 const viewAllPost = () => {
   return (
     <div>Home</div>
@@ -5,3 +6,4 @@ const viewAllPost = () => {
 }
 
 export default viewAllPost
+

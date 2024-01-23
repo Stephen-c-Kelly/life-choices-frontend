@@ -2,6 +2,7 @@ import * as authService from '../services/authService.js'
 
 import { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+import './SignupForm.css'
 
 //add props in once auth is working 
 const SignupForm = (props) => {
