@@ -13,6 +13,16 @@ async function getUserProfile(){
     }
 }
 
+async function getPosts(){
+    try {
+        const res = await axios.get('http://localhost:3000/posts',{
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+            return res.data
+    } catch (error) {
+     throw Error   
+    }
+}
+
 async function createPost(updateInfo){
     try {
         const res = await axios.post('http://localHost:3000/posts',updateInfo,{
@@ -26,5 +36,6 @@ async function createPost(updateInfo){
 
 export{
     getUserProfile,
-    createPost
+    createPost,
+    getPosts
 }
