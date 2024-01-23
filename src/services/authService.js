@@ -11,8 +11,8 @@ async function singup(user){
         if(json.token){
             return json.token
         }
-        if (json.err) {
-            throw new Error(json.err)
+        if (json.error) {
+            throw new Error(json.error)
         }
     } catch (error) {
         throw error
