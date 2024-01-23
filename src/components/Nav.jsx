@@ -8,6 +8,7 @@ const Nav = () => {
             <li><Link to='/profile'>Profile</Link></li>
             <li><Link to='/signup'>Signup</Link> </li>
             <li><Link to='/newpost'>New Post</Link></li>
+            <li><Link to='/viewpost'>View Post</Link></li>
         </ul>
     </div>
   )
