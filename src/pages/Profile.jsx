@@ -1,10 +1,12 @@
-import ProfileComponent from "../components/ProfileComponent";
+import React from 'react';
 
-
-const Profile = () => {
+const ProfilePage = () => {
   return (
-    <div><ProfileComponent/></div>
-  )
+    <div style={{ marginTop: '70px' }}> {/* Adjust the value based on your navbar height */}
+      <h1>Your Profile</h1>
+      {/* Other profile content */}
+    </div>
+  );
 }
 
-export default Profile
+export default ProfilePage;

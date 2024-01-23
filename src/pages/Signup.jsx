@@ -1,6 +1,7 @@
 import SignupForm from "../components/SignupForm"
 import { useState } from "react"
 
+
 //add props in once auth is working
 const Signup = () => {
   const [message, setMessage] = useState([''])

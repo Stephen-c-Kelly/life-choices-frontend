@@ -14,20 +14,21 @@ const App = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState(authService.getUser())
 
-  function handleLogout(){
+  function handleLogout() {
     authService.logout()
     setUser(null)
-    navigate('/')
+    navigate('/login'); // Update this line to navigate to '/login' instead of '/'
   }
 
-  function handleSignupOrLogin(){
+  function handleSignupOrLogin() {
     setUser(authService.getUser())
   }
+
   return (
     <>
       <Nav user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={<Homepage/>}/>
+        <Route path="/landing" element={<Homepage/>}/>
         <Route path="/login" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/newpost" element={<CreatePost/>}/>
