@@ -31,9 +31,9 @@ const App = () => {
         <Route path="/" element={<Homepage/>}/>
         <Route path="/login" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
         <Route path="/signup" element={<Signup/>}/>
-        <Route path="/profile" element={<Profile/>}/>
         <Route path="/newpost" element={<CreatePost/>}/>
         <Route path="/viewpost" element={<ViewPost/>}/>
+        <Route path="/profile" element={<Profile user={user}/>}/>
       </Routes>
     </>
   )

@@ -1,5 +1,6 @@
-import { async } from 'q'
+
 import * as tokenService from './tokenService'
+import axios from 'axios'
 
 async function getUserProfile(){
     try {
@@ -28,9 +29,9 @@ async function createPost(updateInfo){
         const res = await axios.post('http://localHost:3000/posts',updateInfo,{
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
             console.log('create post')
+            return res
     } catch (error) {
         throw Error(error)
-        
     }
 }
 
