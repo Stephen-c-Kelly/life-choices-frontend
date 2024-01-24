@@ -27,11 +27,21 @@ async function getPosts(){
     }
 }
 
+async function getSinglePost(id){
+    try {
+        const res = await axios.get(`${baseUrl}/posts/${id}`, updateInfo,{
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+            return await res.data
+    } catch (error) {
+        console.error("Error in getSinglePost:", error);
+        throw error
+    }
+}
+
 async function createPost(updateInfo){
     try {
         const res = await axios.post(`${baseUrl}/posts`,updateInfo,{
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
-            console.log('create post')
             return res
     } catch (error) {
         throw Error(error)
@@ -41,5 +51,6 @@ async function createPost(updateInfo){
 export{
     getUserProfile,
     createPost,
-    getPosts
+    getPosts,
+    getSinglePost
 }

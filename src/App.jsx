@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/newpost" element={<CreatePost/>}/>
-        <Route path="/viewpost" element={<ViewPost/>}/>
+        <Route path={`/viewpost/:id`} element={<ViewPost/>}/>
         <Route path="/profile" element={<Profile user={user}/>}/>
       </Routes>
     </>
