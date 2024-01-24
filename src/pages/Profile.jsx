@@ -1,4 +1,6 @@
+
 import ProfileComponent from "../components/ProfileComponent";
+
 
 const ProfilePage = (user) => {
   return (

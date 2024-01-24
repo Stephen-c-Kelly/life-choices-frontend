@@ -17,7 +17,7 @@ const App = () => {
   function handleLogout() {
     authService.logout()
     setUser(null)
-    navigate('/login'); // Update this line to navigate to '/login' instead of '/'
+
   }
 
   function handleSignupOrLogin() {
@@ -28,7 +28,7 @@ const App = () => {
     <>
       <Nav user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/landing" element={<Homepage/>}/>
+        <Route path="/" element={<Homepage/>}/>
         <Route path="/login" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/newpost" element={<CreatePost/>}/>

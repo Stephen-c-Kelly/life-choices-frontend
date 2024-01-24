@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-const Nav = () => {
+const Nav = (props) => {
   const location = useLocation();
 
   // List of paths where the Nav should be hidden
@@ -14,6 +14,8 @@ const Nav = () => {
     return null;
   }
 
+  const handleLogout = props.handleLogout
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -23,10 +25,10 @@ const Nav = () => {
               <Link className="nav-link" to="/profile">Profile</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/landing">Home</Link>
+              <Link className="nav-link" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/signout">Sign Out</Link>
+              <Link className="nav-link" to="/login" onClick={handleLogout}>Sign Out</Link>
             </li>
           </ul>
         </div>
