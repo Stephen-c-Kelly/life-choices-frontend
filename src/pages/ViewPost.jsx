@@ -1,9 +1,9 @@
-import ViewPostComponent from '../components/ViewPostComponent'
+import ViewAllPostComponent from '../components/viewAllPosts/ViewAllPosts'
 
 const ViewPost = () => {
   return (
     <div>
-        <ViewPostComponent/>
+        <ViewAllPostComponent/>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 //import { getUserProfile } from '../../src/services/protectedServices';
-import { getUserFromToken } from '../../src/services/tokenService'; // Import getUserFromToken
+import { getUserFromToken } from '../../services/tokenService'; // Import getUserFromToken
 
 import './ProfileComponent.css';
 

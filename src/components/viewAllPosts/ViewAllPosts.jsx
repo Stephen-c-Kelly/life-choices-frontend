@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import * as protectedServices from '../services/protectedServices'
+import * as protectedServices from '../../services/protectedServices'
 
 
 const ViewPostComponent = () => {

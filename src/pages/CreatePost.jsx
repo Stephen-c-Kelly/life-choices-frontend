@@ -1,4 +1,4 @@
-import CreatePostComponent from "../components/CreatePostComponenet"
+import CreatePostComponent from "../components/createPost/CreatePostComponenet"
 
 const CreatePost = () => {
   return (

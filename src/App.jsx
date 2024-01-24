@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Homepage from './pages/Homepage.jsx'
-import Nav from './components/Nav'
+import Nav from './components/nav/Nav.jsx'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
