@@ -23,7 +23,7 @@ const LoginForm = (props) => {
     try {
       await authService.login(formData)
       props.handleSignupOrLogin()
-      navigate('/profile')
+      navigate('/homepage')
     } catch (error) {
       props.updateMessage(error.message)
     }

@@ -28,8 +28,8 @@ const App = () => {
     <>
       <Nav user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={<Homepage/>}/>
-        <Route path="/login" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
+        <Route path="/homepage" element={<Homepage/>}/>
+        <Route path="/" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/newpost" element={<CreatePost/>}/>
         <Route path="/viewpost" element={<ViewPost/>}/>

@@ -26,7 +26,7 @@ const SignupForm = (props) => {
       try {
         await authService.singup(formData)
         //add in handle login/signup 
-        navigate('/login')
+        navigate('/')
       } catch (error) {
         console.error("Error during signup:", error)
         const errorMessage = error.message ||
