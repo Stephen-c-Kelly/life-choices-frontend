@@ -1,5 +1,6 @@
 import { async } from 'q'
 import * as tokenService from './tokenService'
+import axios from 'axios'
 
 async function getUserProfile(){
     try {
