@@ -21,7 +21,7 @@ const CreatePost = () => {
         try {
             protectedServices.createPost(formData)
             console.log(formData)
-            navigate('/')
+            navigate('/profile')
         } catch (error) {
             throw error
         }
