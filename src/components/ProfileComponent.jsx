@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { getUserProfile } from '../../src/services/protectedServices';
+import { useEffect, useState } from 'react';
+//import { getUserProfile } from '../../src/services/protectedServices';
 import { getUserFromToken } from '../../src/services/tokenService'; // Import getUserFromToken
 
 import './ProfileComponent.css';
 
-const ProfileComponent = ( {user} ) => {
+const ProfileComponent = ( user ) => {
     const [username, setUsername] = useState({});
     useEffect(() => {
         const fetchUserProfile = async () => {
