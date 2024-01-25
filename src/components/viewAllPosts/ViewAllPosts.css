@@ -1,0 +1,65 @@
+/* General styling for post container */
+.post-container {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  /* Styling for the choice containers to be side-by-side */
+  .choices-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .choice-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Styling for the images in choice containers */
+  .choices-container img {
+    max-width: 300px; /* adjust as per your need */
+    height: auto;
+    margin-right: 10px;
+  }
+
+  /*  to make image in a fixed size frame */
+  .image-container {
+    width: 200px; /* Fixed width for the frame */
+    height: 250px; /* Fixed height for the frame */
+    overflow: hidden; /* Hide the parts of the image that overflow the container */
+    display: flex; /* Ensures the image stays within the container */
+    justify-content: center; /* Center image horizontally in the container */
+    align-items: center; /* Center image vertically in the container */
+  }
+  
+  .post-image {
+    /* Ensure the image spans the full width of the container */
+    height: 100%; /* Ensure the image spans the full height of the container */
+    object-fit: cover; /* Cover the frame with the image, cropping it if necessary */
+  }
+  
+  
+  /* Styling for the buttons */
+  .choices {
+    padding: 5px 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Styling for the choice counts */
+  .choice-count1, .choice-count2 {
+    margin-top: 5px;
+  }
+  
+  /* Styling for content */
+  .post-content {
+    margin: 10px 0;
+  }
+  
