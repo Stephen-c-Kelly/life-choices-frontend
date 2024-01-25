@@ -11,23 +11,27 @@ const ProfileComponent = ( user ) => {
             try {
                 // Get user from token
                 const loggedInUser = getUserFromToken();
-                
+                console.log(loggedInUser)
                 setUsername(loggedInUser.username);
             } catch (error) {
                 console.error('Error fetching user profile:', error);
             }
         };
-
+        
         fetchUserProfile();
         // if (user) {
         // }
     }, [user]);
 
+    
+    
     return (
         <main className='container'>
             <h1>{username ? `Hello, ${username}` : 'Loading...'}</h1>
         </main>
     );
 };
+
+
 
 export default ProfileComponent;
