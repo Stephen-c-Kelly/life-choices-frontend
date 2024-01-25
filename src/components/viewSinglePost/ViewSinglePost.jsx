@@ -50,6 +50,9 @@ const ViewSinglePost = (props) => {
       <div>
         <p>{post? post.updatedAt : 'Loading'}</p>
       </div>
+      <div>
+        <p>{post? post.profileId  : 'Loading'}</p>
+      </div>
     </div>
   )
 }
