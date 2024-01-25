@@ -27,4 +27,16 @@ function removeToken(){
     localStorage.removeItem('token')
 }
 
-export{setToken, getUserFromToken, getToken, removeToken}
+function getProfileFromToken() {
+    const token = getToken();
+    if (token) {
+        const payload = jwtDecode(token);
+        console.log("Decoded Token Payload:", payload);
+        const username = payload.user.username;
+        console.log("Profile ID from Token:", username);
+        return username;
+    }
+    return null;
+}
+
+export{setToken, getUserFromToken, getToken, removeToken, getProfileFromToken}

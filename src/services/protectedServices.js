@@ -17,24 +17,16 @@ async function getUserProfile(){
     }
 }
 
-async function singleProfile(username) {
-    try {
-        const token = tokenService.getToken();
-        const response = await fetch(`${baseUrl}/profiles/${username}`, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Error fetching user profile. Status: ${response.status}`);
-        }
-
-        return await response.json();
-    } catch (error) {
-        console.error('Error in singleProfile:', error);
-        throw error;
+async function singleProfile(){
+    try{
+        const user = tokenService.getProfileFromToken()
+        const res = await axios.get(`${baseUrl}/profiles/${user}`,{headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+        //console.log(res.json(), 'res')
+        return res.data
+    }catch{
+        throw Error
     }
 }
-
 
 async function getPosts(){
     try {
