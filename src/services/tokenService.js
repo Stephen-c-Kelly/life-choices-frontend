@@ -3,7 +3,7 @@ import {jwtDecode} from 'jwt-decode'
 
 function getUserFromToken(){
     const token = getToken()
-    console.log(token)
+    // console.log(token)
     return token ? jwtDecode(token).user:null
 }
 
@@ -31,9 +31,9 @@ function getProfileFromToken() {
     const token = getToken();
     if (token) {
         const payload = jwtDecode(token);
-        console.log("Decoded Token Payload:", payload);
+        // console.log("Decoded Token Payload:", payload);
         const username = payload.user.username;
-        console.log("Profile ID from Token:", username);
+        // console.log("Profile ID from Token:", username);
         return username;
     }
     return null;
