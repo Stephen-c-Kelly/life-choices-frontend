@@ -1,0 +1,59 @@
+Navbar styles
+.navbar {
+  background-color: #f5ecc6; /* Choose your desired background color */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Set a high z-index to make sure it's on top of other elements */
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: #080808;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  margin-right: 15px;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #8b6914;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #5e470d;
+}
+
+.sep{
+  justify-content: space-evenly;
+}
+
+.nav-item{
+  margin: 0 auto;
+}
+
+/* Align navbar items horizontally */
+@media (max-width: 991px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .nav-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+
