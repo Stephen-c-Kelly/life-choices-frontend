@@ -18,12 +18,13 @@ const ViewSinglePost = (props) => {
     fetchSingle()
   },[])
 
-  console.log(post, 'middle');
+  // console.log(post, 'middle');
 
   useEffect(() => {
     console.log(post, 'updated post state');
   }, [post])
 
+  
   return (
     <div>
       <div>
@@ -52,6 +53,9 @@ const ViewSinglePost = (props) => {
       </div>
       <div>
         <p>{post? post.profileId  : 'Loading'}</p>
+      </div>
+      <div>
+        <p>{post? post.username  : 'Loading'}</p>
       </div>
     </div>
   )

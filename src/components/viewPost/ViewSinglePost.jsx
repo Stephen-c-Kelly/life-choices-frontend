@@ -18,7 +18,7 @@ const ViewSinglePost = (props) => {
     fetchSingle()
   },[])
 
-  console.log(post, 'middle');
+  // console.log(post, 'middle');
 
   useEffect(() => {
     console.log(post, 'updated post state');
