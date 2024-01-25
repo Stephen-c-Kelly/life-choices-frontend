@@ -24,7 +24,6 @@ const ViewSinglePost = (props) => {
     console.log(post, 'updated post state');
   }, [post])
 
-  
   return (
     <div>
       <div>
@@ -53,9 +52,6 @@ const ViewSinglePost = (props) => {
       </div>
       <div>
         <p>{post? post.profileId  : 'Loading'}</p>
-      </div>
-      <div>
-        <p>{post? post.username  : 'Loading'}</p>
       </div>
     </div>
   )

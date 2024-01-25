@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import {Link} from 'react-router-dom'
 import * as protectedServices from '../../services/protectedServices'
 import * as tokenServices from '../../services/tokenService.js'
 
@@ -21,7 +22,9 @@ const ViewPostComponent = () => {
       setDisplay(singlepost)
     }
     fetchPosts()
+    console.log(display)
   }, [])
+
 // console.log(display)
 
 useEffect(() => {
@@ -75,15 +78,14 @@ useEffect(() => {
     
   }
 
-
-
   return (
     <div>
    {display.length ? 
   <>
+
   {display.map((post, index) =>
   <div key={`post${index}`} className="post-container">
-      <h2 key={post._id}>{post.title}</h2>
+      <Link to={`/viewpost/${post._id}`} key={post._id}>{post.title}</Link>
       <h4  key={post.content}className="post-content">{post.content}</h4>
 
       <div className="choices-container">
@@ -118,16 +120,9 @@ useEffect(() => {
           </div>
         </div>
       </div>
-      
-
-
-      
-      
-      
 
   </div>
 
-  
   )}
   </>:
   <p>No Posts</p>

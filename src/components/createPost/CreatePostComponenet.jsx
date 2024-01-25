@@ -1,16 +1,20 @@
 import * as protectedServices from '../../services/protectedServices.js'
-
+import { getUserFromToken } from '../../services/tokenService.js'
 import {Link, useNavigate} from 'react-router-dom'
 import { useState } from "react"
 
 const CreatePost = () => {
     const navigate = useNavigate()
+    const userInfo = getUserFromToken()
+    console.log(userInfo, 'user info')
     //took image out for now
     const [formData, setFormData] = useState({
         title: '',
         content: '',
         choice1: '',
         choice2: '',
+        profileId: userInfo.profileId,
+        username: userInfo.username,
     })
 
     const handleChange = e =>{
@@ -32,6 +36,7 @@ const CreatePost = () => {
     }
 
     const {title,content,choice1,choice2} = formData
+
   return (
     <form autoComplete='off' onSubmit={handleSubmit}>
       <div>

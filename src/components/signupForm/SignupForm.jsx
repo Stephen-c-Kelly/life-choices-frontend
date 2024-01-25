@@ -30,7 +30,7 @@ const SignupForm = (props) => {
       } catch (error) {
         console.error("Error during signup:", error)
         const errorMessage = error.message ||
-        updateMessage(errorMessage)
+        props.updateMessage(errorMessage)
       }
     }
 
