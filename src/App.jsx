@@ -1,18 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Homepage from './pages/Homepage.jsx'
 import Nav from './components/nav/Nav.jsx'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Profile from './pages/Profile'
+import Profile from './components/profile/ProfileComponent.jsx'
 import ViewPost from './pages/ViewPost.jsx'
 import * as authService from './services/authService.js'
 import './App.css'
 import CreatePost from './pages/CreatePost.jsx'
+import { getUserFromToken } from './services/tokenService.js'
 
 const App = () => {
-  const navigate = useNavigate()
-  const [user, setUser] = useState(authService.getUser())
+  const [user, setUser] = useState()
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+        try {
+            // Get user from token
+            const loggedInUser = getUserFromToken();
+            setUser(loggedInUser);
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
+        }
+    };
+    fetchUserProfile();
+}, []);
 
   function handleLogout() {
     authService.logout()

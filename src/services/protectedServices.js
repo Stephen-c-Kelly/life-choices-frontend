@@ -17,13 +17,32 @@ async function getUserProfile(){
     }
 }
 
+async function singleProfile(username) {
+    try {
+        const token = tokenService.getToken();
+        const response = await fetch(`${baseUrl}/profiles/${username}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error fetching user profile. Status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error in singleProfile:', error);
+        throw error;
+    }
+}
+
+
 async function getPosts(){
     try {
         const res = await axios.get(`${baseUrl}/posts`,{
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
             return res.data
     } catch (error) {
-     throw Error   
+        throw Error   
     }
 }
 
@@ -56,5 +75,6 @@ export{
     getUserProfile,
     createPost,
     getPosts,
-    getSinglePost
+    getSinglePost,
+    singleProfile
 }
