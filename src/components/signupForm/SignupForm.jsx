@@ -1,4 +1,4 @@
-import * as authService from '../services/authService.js'
+import * as authService from '../../services/authService.js'
 
 import { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
@@ -26,7 +26,7 @@ const SignupForm = (props) => {
       try {
         await authService.singup(formData)
         //add in handle login/signup 
-        navigate('/login')
+        navigate('/')
       } catch (error) {
         console.error("Error during signup:", error)
         const errorMessage = error.message ||

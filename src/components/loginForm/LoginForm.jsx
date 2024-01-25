@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import {Link, useNavigate} from 'react-router-dom'
 
-import * as authService from '../services/authService.js'
+import * as authService from '../../services/authService.js'
 
 //import auth here 
 
@@ -23,7 +23,7 @@ const LoginForm = (props) => {
     try {
       await authService.login(formData)
       props.handleSignupOrLogin()
-      navigate('/profile')
+      navigate('/homepage')
     } catch (error) {
       props.updateMessage(error.message)
     }
@@ -58,6 +58,10 @@ const LoginForm = (props) => {
       </div>
       <div>
         <button>Log In</button>
+      </div>
+      <div>
+        <p>Or Sign Up using this link <Link to="/signup"> Register</Link>
+        </p>
       </div>
       {/* this makes the error message appear*/}
       {props.errorMessage && <p className="error">{props.errorMessage}</p>}

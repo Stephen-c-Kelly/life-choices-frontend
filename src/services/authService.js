@@ -1,12 +1,15 @@
 import * as tokenService from './tokenService.js'
 
+const baseUrl = `http://localhost:3000`
+// const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
+
 function getUser(){
     return tokenService.getUserFromToken()
 }
 
 async function singup(user){
     try {
-        const res = await axios.post('http://localhost:3000/signup', user)
+        const res = await axios.post(`${baseUrl}/signup`, user)
         const json = res.data
         if(json.token){
             return json.token
@@ -22,7 +25,7 @@ async function singup(user){
 
 async function login(credentials){
     try {
-        const res = await axios.post('http://localhost:3000/signin', credentials)
+        const res = await axios.post(`${baseUrl}/signin`, credentials)
         const json = await res.data
         if (json.token){
             tokenService.setToken(json.token)
@@ -42,5 +45,6 @@ async function login(credentials){
 
 function logout(){
     tokenService.removeToken()
+    
 }
 export { singup, login, getUser, logout}

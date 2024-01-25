@@ -1,4 +1,4 @@
-import * as protectedServices from '../services/protectedServices.js'
+import * as protectedServices from '../../services/protectedServices.js'
 
 import {Link, useNavigate} from 'react-router-dom'
 import { useState } from "react"
@@ -21,7 +21,7 @@ const CreatePost = () => {
         try {
             protectedServices.createPost(formData)
             console.log(formData)
-            navigate('/')
+            navigate('/profile')
         } catch (error) {
             throw error
         }

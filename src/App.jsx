@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Homepage from './pages/Homepage.jsx'
-import Nav from './components/Nav'
+import Nav from './components/nav/Nav.jsx'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
@@ -17,7 +17,7 @@ const App = () => {
   function handleLogout() {
     authService.logout()
     setUser(null)
-    navigate('/login'); // Update this line to navigate to '/login' instead of '/'
+
   }
 
   function handleSignupOrLogin() {
@@ -28,8 +28,8 @@ const App = () => {
     <>
       <Nav user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/landing" element={<Homepage/>}/>
-        <Route path="/login" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
+        <Route path="/homepage" element={<Homepage/>}/>
+        <Route path="/" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/newpost" element={<CreatePost/>}/>
         <Route path="/viewpost" element={<ViewPost/>}/>

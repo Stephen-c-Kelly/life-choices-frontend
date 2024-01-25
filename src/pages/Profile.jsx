@@ -1,4 +1,6 @@
-import ProfileComponent from "../components/ProfileComponent";
+
+import ProfileComponent from "../components/profile/ProfileComponent";
+
 
 const ProfilePage = (user) => {
   return (
