@@ -9,7 +9,7 @@ const ProfileComponent = ( props ) => {
         const fetchProfile = async () =>{
             const profileData = await protectedServices.singleProfile()
             console.log(profileData)
-            setDisplay(profileData)
+            setDisplay(profileData.profile[0].postId)
         }
         fetchProfile()
     },[])
