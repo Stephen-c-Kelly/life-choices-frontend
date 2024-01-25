@@ -6,6 +6,8 @@ import './ProfileComponent.css';
 
 const ProfileComponent = ( user ) => {
     const [username, setUsername] = useState({});
+
+    
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
@@ -23,8 +25,8 @@ const ProfileComponent = ( user ) => {
         // }
     }, [user]);
 
-    
-    
+    const users = getUserFromToken()
+    console.log(users)
     return (
         <main className='container'>
             <h1>{username ? `Hello, ${username}` : 'Loading...'}</h1>
