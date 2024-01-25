@@ -5,7 +5,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import './SignupForm.css'
 
 //add props in once auth is working 
-const SignupForm = (updateMessage) => {
+const SignupForm = (props) => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: '',
@@ -16,7 +16,7 @@ const SignupForm = (updateMessage) => {
     })
 
     const handleChange = e =>{
-      updateMessage('')
+      props.updateMessage('')
       setFormData({...formData,[e.target.name]: e.target.value,})
       console.log(formData, 'formdatat')
     }
@@ -30,7 +30,7 @@ const SignupForm = (updateMessage) => {
       } catch (error) {
         console.error("Error during signup:", error)
         const errorMessage = error.message ||
-        updateMessage(errorMessage)
+        props.updateMessage(errorMessage)
       }
     }
 
