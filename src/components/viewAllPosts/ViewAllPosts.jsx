@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import {Link} from 'react-router-dom'
 import * as protectedServices from '../../services/protectedServices'
 
 
@@ -12,14 +13,17 @@ const ViewPostComponent = () => {
       setDisplay(singlepost)
     }
     fetchPosts()
+    console.log(display)
   }, [])
-  
+  console.log(display)
   return (
     <div>
    {display.length ? 
   <>
   {display.map(post =>
-  <p key={post._id}>{post.title}</p>
+  <div>
+  <Link to={`/viewpost/${post._id}`} key={post._id}>{post.title}</Link>
+  </div>
   )}
   </>:
   <p>No Posts</p>
