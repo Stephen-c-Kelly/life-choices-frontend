@@ -1,4 +1,5 @@
 import {getSinglePost} from '../../services/protectedServices.js'
+import CommentComponent from '../comment/Comment.jsx'
 import { useState, useEffect} from 'react'
 
 const ViewSinglePost = (props) => {
@@ -57,6 +58,7 @@ const ViewSinglePost = (props) => {
       <div>
         <p>{post? post.username  : 'Loading'}</p>
       </div>
+      <CommentComponent props={props} />
     </div>
   )
 }
