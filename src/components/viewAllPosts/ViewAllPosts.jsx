@@ -135,7 +135,7 @@ const ViewPostComponent = () => {
     }
     
   }
-
+console.log(display)
 
 
   return (
@@ -146,7 +146,9 @@ const ViewPostComponent = () => {
   {display.map((post, index) =>
   <div key={`post${index}`} className="post-container">
     <div className="post-header">
-      <small className="username">{`@${thisUser.username}`}</small>
+      <Link to={`/profile/${post.profileId}`} key={post._id}>
+        <small className="username">{`@${post.username}`}</small>
+      </Link>
     </div>
       
       <Link to={`/viewpost/${post._id}`} key={post._id}><h1>{post.title}</h1></Link>
@@ -199,7 +201,10 @@ const ViewPostComponent = () => {
           <p className="likes-count">{post.likes.length}</p>
         </div>
         <div className="comments-container">
-        <i className="far fa-comment"></i>
+        <Link to={`/viewpost/${post._id}`} key={post._id}>
+          <i className="far fa-comment"></i>
+        </Link>
+        
         <p className="comments-count">{post.commentId.length}</p>
         </div>
       </div>
