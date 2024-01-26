@@ -45,6 +45,9 @@ const ProfileComponent = ( props ) => {
                 </div>)}
                 
            </div>
+           {/* this code could use some refactoring, adding choice titles and votes on the page. */}
+
+           
         {/* <div>
             {display.map((post, index) =>
             
