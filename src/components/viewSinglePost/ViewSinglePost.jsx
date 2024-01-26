@@ -22,7 +22,7 @@ const ViewSinglePost = (props) => {
   // console.log(post, 'middle');
 
   useEffect(() => {
-    console.log(post, 'updated post state');
+    // console.log(post, 'updated poeest state');
   }, [post])
 
   

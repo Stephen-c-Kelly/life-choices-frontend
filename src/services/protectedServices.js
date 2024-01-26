@@ -82,11 +82,39 @@ async function createPost(updateInfo){
     }
 }
 
+async function addCommenttoId(postId){
+    // ID = USE PARAMS TO GRAB
+    try{
+      // 1 - create comment
+      // 1.5 save comment id
+      // 2 - add comment id to post with  
+      // you can also add comment id to post in the backend. 
+        
+    } catch (error) {
+        throw Error(error)
+    }
+}
+
+async function getCommentsfromPostId(postId){
+    
+    try{
+    // axios call to look through all Profiles and see if they have all comments with this post 
+    // maybe do a promise.all to tie it all together. output as an array of comments
+    // 
+
+    } catch (error) {
+        throw Error(error)
+    }
+}
+
+
 export{
     getUserProfile,
     createPost,
     getPosts,
     getSinglePost,
     getMultiplePosts,
+    addCommenttoId,
+    getCommentsfromPostId,
     singleProfile
 }
