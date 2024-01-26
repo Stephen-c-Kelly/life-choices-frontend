@@ -16,19 +16,17 @@ const ProfileComponent = ( props ) => {
     },[])
 
     const [posts, setPosts] = useState([])
-    useEffect((arr)=>{
-        const fetchPosts = async (arr) =>{
-            const userPosts= await protectedServices.getMultiplePosts(arr)
-            console.log(userPosts)
+
+
+    useEffect(()=>{
+        const fetchPosts = async (display) =>{
+            const userPosts= await protectedServices.getMultiplePosts(display)
+            console.log(`user posts are:`, userPosts)
             setPosts(userPosts)
         }
-        fetchPosts(arr)
-        
-    }, [])
+        fetchPosts(display)
 
-
-
-    
+    }, [display])
 
     // use axios to grab the posts from each ID
 
@@ -36,10 +34,20 @@ const ProfileComponent = ( props ) => {
     // ['65b3f21b1cc3d7e50837925d', '65b3f2401cc3d7e508379266']
     return (
         <main className='container'>
-            <h1>{props.user ? `Hello, ${props.user.username}` : 'Loading...'}</h1>
-
+            <h1>
+                {props.user ? `Hello, ${props.user.username}` : 'Loading...'}
+            </h1>
+            <div>
+            {posts.map((post, index) =>
+                <div key={`post${index}`} className="post-container">
+                <Link to={`/viewpost/${post._id}`} key={post._id}>{post.title}</Link>
+                <h4 key={post.content}className="post-content">{post.content}</h4>
+                </div>)}
+                
+           </div>
+        {/* <div>
             {display.map((post, index) =>
-            // mapping out the display state variable 
+            
             <div key={`post${index}`} className="post-container">
             <Link to={`/viewpost/${post._id}`} key={post._id}>{post.title}</Link>
             <h4 key={post.content}className="post-content">{post.content}</h4>
@@ -47,16 +55,17 @@ const ProfileComponent = ( props ) => {
             <div className="choices-container">
                 <div className="choices1-container">
                 <div className="image-container">
-                {/* <img key={`img$[0]`} src={post.img[0]} className="post-image"/> */}
+                <img key={`img$[0]`} src={post.img[0]} className="post-image"/>
                 </div>
                 
                 <div className="choice-box">
-                    {/* <button name="count1" className="choices choice1" key="choice1" 
+                    <button name="count1" className="choices choice1" key="choice1" 
                     post={post} data-postid={post._id} onClick={(e) => onClick(e, post, "count1")}
                     disabled={clickedPosts[post._id]?.count1 || clickedPosts[post._id]?.count2 || post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
                     {post.choice1}
-                    </button> */}
-                    <p  key='choice1-count'className="choice-count1">{post.count1.length}</p>
+                    </button>
+                    <p  key='choice1-count'className="choice-count1"
+                    >{post.count1.length}</p>
                 </div>
                 </div>
 
@@ -66,12 +75,12 @@ const ProfileComponent = ( props ) => {
                 </div>
                 
                 <div className="choice-box">
-                    {/* <button className="choices choice2" key="choice2"
+                    <button className="choices choice2" key="choice2"
                     post={post} data-postid={post._id}
                     onClick={(e) => onClick(e, post, "count2")}
                     disabled={clickedPosts[post._id]?.count1 || clickedPosts[post._id]?.count2 || post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
                     {post.choice2}
-                    </button> */}
+                    </button>
                     <p key='choice2-count' className="choice-count2">{post.count2.length}</p>
                 </div>
                 </div>
@@ -79,6 +88,7 @@ const ProfileComponent = ( props ) => {
 
             </div>
             )}
+            </div> */}
         </main>
     );
 };

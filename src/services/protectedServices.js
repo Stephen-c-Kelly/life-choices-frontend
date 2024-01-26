@@ -54,9 +54,9 @@ async function getSinglePost(id) {
 }
 
 async function getMultiplePosts(arr){
-    console.log(`ids being passed:`, arr)
+    console.log(`arr being passed:`, arr)
     try {
-        const requests = ids.map(id=>{
+        const requests = arr.map(id=>{
             return axios.get(`${baseUrl}/posts/${id}`, {
                 headers: { Authorization: `Bearer ${tokenService.getToken()}` }
             }
