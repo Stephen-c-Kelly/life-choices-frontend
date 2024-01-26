@@ -68,9 +68,7 @@ const ViewPostComponent = () => {
         currentDisplay.map(p => 
           p._id === id ? { ...p, 
             likes: updateLikes.data.updatedPost.likes, 
-            isLiked: !isLiked,
-            isSelectedCount1: countType === 'count1' ? true : p.isSelectedCount1,
-            isSelectedCount2: countType === 'count2' ? true : p.isSelectedCount2, }
+            isLiked: !isLiked }
             : p,
         )
       );
@@ -128,7 +126,9 @@ const ViewPostComponent = () => {
       setDisplay(currentDisplay =>
         currentDisplay.map(p =>
           p._id === post._id
-            ? { ...p, isSelectedCount1: countType === 'count1' ? true : p.isSelectedCount1 }
+            ? { ...p,             
+              isSelectedCount1: countType === 'count1' ? true : p.isSelectedCount1,
+              isSelectedCount2: countType === 'count2' ? true : p.isSelectedCount2,  }
             : p
         )
       );
