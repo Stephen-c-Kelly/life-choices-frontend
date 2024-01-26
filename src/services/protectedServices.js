@@ -38,6 +38,16 @@ async function getPosts(){
     }
 }
 
+async function updatePost(id, updateInfo){
+    try {
+        const res = await axios.put(`${baseUrl}/posts/${id}`,updateInfo, {
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+            return res
+    } catch (error) {
+        throw Error(error)        
+    }
+}
+
 async function getSinglePost(id) {
     // console.log("ID being passed to getSinglePost:", id) // Log the ID to check its value
 
@@ -69,5 +79,6 @@ export{
     createPost,
     getPosts,
     getSinglePost,
-    singleProfile
+    singleProfile,
+    updatePost
 }
