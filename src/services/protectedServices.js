@@ -58,6 +58,7 @@ async function createPost(updateInfo){
         const res = await axios.post(`${baseUrl}/posts`,updateInfo,{
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
             return res
+        
     } catch (error) {
         throw Error(error)
     }
