@@ -2,6 +2,7 @@
 import './ProfileComponent.css';
 import * as protectedServices from '../../services/protectedServices'
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ProfileComponent = ( props ) => {
     const [display, setDisplay] = useState([])
@@ -13,6 +14,9 @@ const ProfileComponent = ( props ) => {
         }
         fetchProfile()
     },[])
+
+    // define another variable to grab posts 
+
     console.log(display, 'display')
     return (
         <main className='container'>
@@ -20,7 +24,7 @@ const ProfileComponent = ( props ) => {
 
             {display.map((post, index) =>
             // mapping out the display state variable 
-        <div key={`post${index}`} className="post-container">
+            <div key={`post${index}`} className="post-container">
             <Link to={`/viewpost/${post._id}`} key={post._id}>{post.title}</Link>
             <h4  key={post.content}className="post-content">{post.content}</h4>
 
@@ -57,8 +61,9 @@ const ProfileComponent = ( props ) => {
                 </div>
             </div>
 
-        </div>
-    </main>
+            </div>
+            )}
+        </main>
     );
 };
 
