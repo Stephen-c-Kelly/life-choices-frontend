@@ -74,11 +74,23 @@ async function createPost(updateInfo){
     }
 }
 
+async function deletePost(id){
+    try {
+        const res = await axios.get(`${baseUrl}/posts/${id}`, {
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+        })
+        
+    } catch (error) {
+        throw Error (error)
+    }
+}
+
 export{
     getUserProfile,
     createPost,
     getPosts,
     getSinglePost,
     singleProfile,
-    updatePost
+    updatePost,
+    deletePost
 }

@@ -33,9 +33,12 @@ const ViewSinglePost = (props) => {
   const handleSubmit = async e =>{
       e.preventDefault()
       try {
-        console.log(props.id, 'id')
+        console.log('click')
         console.log(formData, 'form data')
          const update = await updatePost(props.id,formData)
+         setIsEditMode(!isEditMode)
+          post.title = formData.title
+          post.content = formData.content
       } catch (error) {
           throw error
       }
@@ -51,14 +54,15 @@ const ViewSinglePost = (props) => {
     }
   }
   
+const handleDelete = () =>{
 
+}
 
   return (
     <div>
       {post ? (
         <>
           {isEditMode ? (
-            // Edit mode: show form for title and content
             <form onSubmit={handleSubmit}>
               <div>
                 <input
@@ -83,7 +87,6 @@ const ViewSinglePost = (props) => {
               <button type="button" onClick={toggleEdit}>Cancel</button>
             </form>
           ) : (
-            // View mode: display title and content as text
             <>
               <div>
                 <h1>{post.title}</h1>
@@ -118,96 +121,15 @@ const ViewSinglePost = (props) => {
       <div>
         <p>{post? post.username  : 'Loading'}</p>
       </div>
-          
-          {/* Edit button */}
-          {user.profileId === post.profileId && (
-            <button onClick={toggleEdit}>{isEditMode ? 'Cancel' : 'Edit'}</button>
+          {!isEditMode && (
+            <button onClick={toggleEdit}>Edit</button>
           )}
+          <button onClick={handleDelete}>Delete</button>
         </>
       ) : (
         <p>Loading...</p>
       )}
     </div>
-
-    // <div>
-    //   <div>
-    //     <h1>{post ? post.title : 'Loading'}</h1>
-    //   </div>
-    //   <div>
-    //     <p>{post? post.content : 'Loading'}</p>
-    //   </div>
-      // <div>
-      //   <p>{post? post.choice1 : 'Loading'}</p>
-      // </div>
-      // <div>
-      //   <p>{post? post.count1 : 'Loading'}</p>
-      // </div>
-      // <div>
-      //   <p>{post? post.choice2 : 'Loading'}</p>
-      // </div>
-      // <div>
-      //   <p>{post? post.count2 : 'Loading'}</p>
-      // </div>
-      // <div>
-      //   <p>{post? post.img : 'Loading'}</p>
-      // </div>
-      // <div>
-      //   <p>{post? post.updatedAt : 'Loading'}</p>
-      // </div>
-      // <div>
-      //   <p>{post? post.profileId  : 'Loading'}</p>
-      // </div>
-      // <div>
-      //   <p>{post? post.username  : 'Loading'}</p>
-      // </div>
-    //   {post && user.profileId === post.profileId? 
-    //   <>
-    //   <button onClick={toggleEdit}>Edit</button> <button>Delete</button>
-    //   </>
-    //   : null }
-    //   {post && user.profileId && !isEditMode === post.profileId? 
-    //   <>
-    //     <form>
-    //     <div>
-    //       <input type="text"
-    //         autoComplete='off'
-    //         id='title'
-    //         onChange={handleChange}
-    //         name='title'
-    //         placeholder={post? post.content: 'loading'}/>
-    //     </div>
-    //     <div>
-    //       <input type="text" autoComplete='off'
-    //       id='content'
-    //       onChange={handleChange}
-    //       name='content'
-    //       placeholder={post? post.content: 'loading'}/>
-    //     </div>
-    //     <button onClick={handleSubmit}>Update</button>
-    //     <button onClick={toggleEdit}>Cancel</button>
-    //   </form>
-    //   </>
-    //   : null }
-    //    <form>
-    //     <div>
-    //       <input type="text"
-    //         autoComplete='off'
-    //         id='title'
-    //         onChange={handleChange}
-    //         name='title'
-    //         placeholder={post? post.content: 'loading'}/>
-    //     </div>
-    //     <div>
-    //       <input type="text" autoComplete='off'
-    //       id='content'
-    //       onChange={handleChange}
-    //       name='content'
-    //       placeholder={post? post.content: 'loading'}/>
-    //     </div>
-    //     <button onClick={handleSubmit}>Update</button>
-    //     <button onClick={toggleEdit}>Cancel</button>
-    //   </form>
-    // </div>
   )
 }
 
