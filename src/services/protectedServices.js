@@ -53,6 +53,24 @@ async function getSinglePost(id) {
     }
 }
 
+async function getMultiplePosts(arr){
+    console.log(`arr being passed:`, arr)
+    try {
+        const requests = arr.map(id=>{
+            return axios.get(`${baseUrl}/posts/${id}`, {
+                headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+            }
+        )})
+
+        const responses = await Promise.all(requests);
+        console.log(`posts`, responses);
+
+        return responses.map(res => res.data.post)
+    } catch (error) {
+        console.error("Error in getMultiplePosts:", error);
+        throw error;}
+}
+
 async function createPost(updateInfo){
     try {
         const res = await axios.post(`${baseUrl}/posts`,updateInfo,{
@@ -69,5 +87,6 @@ export{
     createPost,
     getPosts,
     getSinglePost,
+    getMultiplePosts,
     singleProfile
 }
