@@ -39,16 +39,16 @@ async function getPosts(){
 }
 
 async function getSinglePost(id) {
-    console.log("ID being passed to getSinglePost:", id) // Log the ID to check its value
+    // console.log("ID being passed to getSinglePost:", id) // Log the ID to check its value
 
     try {
         const res = await axios.get(`${baseUrl}/posts/${id}`, {
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }
         })
-        console.log(res, 'this is your res')
+        // console.log(res, 'this is your res')
         return res.data.post
     } catch (error) {
-        console.error("Error in getSinglePost:", error)
+        // console.error("Error in getSinglePost:", error)
         throw error
     }
 }

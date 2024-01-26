@@ -1,15 +1,18 @@
 import {getSinglePost} from '../../services/protectedServices.js'
 import { useState, useEffect} from 'react'
 
-const ViewSinglePost = (props) => {
+const ViewSinglePost = ({id, user}) => {
   //set to null because it's an empty object 
   const [post, setPost] = useState(null)
-  console.log(props.id)
+
+console.log(user, 'user ')
+  // console.log(props, "props")
+
 
   useEffect(()=>{
     const fetchSingle = async () => {
       try {
-        const singlePost = await getSinglePost(props.id)
+        const singlePost = await getSinglePost(id)
         setPost(singlePost)
       } catch (error) {
         console.error("Error fetching post:", error)
@@ -18,15 +21,15 @@ const ViewSinglePost = (props) => {
     fetchSingle()
   },[])
 
-  // console.log(post, 'middle');
-
-  useEffect(() => {
-    console.log(post, 'updated post state');
-  }, [post])
+// console.log(post, 'post info')
+  // useEffect(() => {
+  //   console.log(post, 'updated post state');
+  // }, [post])
 
   
   return (
     <div>
+      {id === post? 'yes': 'no'}
       <div>
         <h1>{post ? post.title : 'Loading'}</h1>
       </div>
