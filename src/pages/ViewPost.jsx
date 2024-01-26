@@ -5,7 +5,7 @@ const ViewPost = (user) => {
   const {id} = useParams()
   return (
     <div>
-      <ViewSinglePost user={user.props} id={id}/>
+      <ViewSinglePost user={user} id={id}/>
     </div>
   )
 }

@@ -1,18 +1,18 @@
 import {getSinglePost} from '../../services/protectedServices.js'
 import { useState, useEffect} from 'react'
+import { getUserFromToken } from '../../services/tokenService.js'
 
-const ViewSinglePost = ({id, user}) => {
-  //set to null because it's an empty object 
+const ViewSinglePost = (props) => {
   const [post, setPost] = useState(null)
-
-console.log(user, 'user ')
-  // console.log(props, "props")
+  
+  const user = getUserFromToken()
+  console.log(user.profileId, 'first')
 
 
   useEffect(()=>{
     const fetchSingle = async () => {
       try {
-        const singlePost = await getSinglePost(id)
+        const singlePost = await getSinglePost(props.id)
         setPost(singlePost)
       } catch (error) {
         console.error("Error fetching post:", error)
@@ -29,7 +29,12 @@ console.log(user, 'user ')
   
   return (
     <div>
-      {id === post? 'yes': 'no'}
+      {post && user.profileId === post.profileId? 
+      <>
+      'yes' 
+      </>
+      :
+      <div>
       <div>
         <h1>{post ? post.title : 'Loading'}</h1>
       </div>
@@ -60,6 +65,8 @@ console.log(user, 'user ')
       <div>
         <p>{post? post.username  : 'Loading'}</p>
       </div>
+      </div>
+}
     </div>
   )
 }
