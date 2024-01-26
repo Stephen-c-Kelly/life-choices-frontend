@@ -14,37 +14,84 @@ const ViewPostComponent = () => {
   const [thisUser, setThisUser] =useState(null)
 
 
-  useEffect(()=>{
-    const fetchPosts = async () =>{
-      const postsData = await protectedServices.getPosts()
-      const singlepost = postsData.allPosts
-      singlepost.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));// Sort function
-      setDisplay(singlepost)
+  useEffect(() => {
+    const fetchUserAndPost = async () => {
+      const loggedInUser = await tokenServices.getUserFromToken()
+      setThisUser(loggedInUser)
+
+      if (loggedInUser){
+        const postsData = await protectedServices.getPosts()
+        const singlePost = postsData.allPosts.map(post => ({
+          ...post,
+          isLiked: post.likes.includes(loggedInUser.username),// Add isLiked property
+          isSelectedCount1: post.count1.includes(loggedInUser.username), // New property
+          isSelectedCount2: post.count2.includes(loggedInUser.username)  
+        }));
+        singlePost.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));// Sort function
+
+
+        setDisplay(singlePost)
+        }
     }
-    fetchPosts()
-    console.log(display)
+    fetchUserAndPost()
+
   }, [])
+// console.log(thisUser)
 
-// console.log(display)
 
-useEffect(() => {
-  const fetchUser = async () => {
-    const loggedInUser = await tokenServices.getUserFromToken()
-    setThisUser(loggedInUser)
+
+
+  //check if user has liked a post
+// console.log(display.likes.includes(thisUser))
+
+  // add like handler
+  const likeHandler = async (e, post)=>{
+    const id = post._id
+    const isLiked = post.isLiked
+    let updateInfo
+    if (!isLiked){
+      e.target.className = "fas fa-heart"
+      updateInfo = { $push:{likes:thisUser.username} }
+
+    }else{
+      e.target.className = "far fa-heart"
+      updateInfo = { $pull: {likes:thisUser.username} }
+
+    }
+    try {
+      const updateLikes = await protectedServices.updatePost(id, updateInfo)
+      const likesPElement = e.target.nextElementSibling;
+      likesPElement.innerText = updateLikes.data.updatedPost.likes.length
+      console.log(updateLikes.data.updatedPost.likes)
+      setDisplay(currentDisplay =>
+
+        currentDisplay.map(p => 
+          p._id === id ? { ...p, 
+            likes: updateLikes.data.updatedPost.likes, 
+            isLiked: !isLiked,
+            isSelectedCount1: countType === 'count1' ? true : p.isSelectedCount1,
+            isSelectedCount2: countType === 'count2' ? true : p.isSelectedCount2, }
+            : p,
+        )
+      );
+
+      if (post.isSelectedCount1 === true){
+          
+      }
+      
+
+    }catch (error) {
+      console.error('Error updating likes:', error);
+    }
   }
-  fetchUser()
-
-}, [])
 
   const onClick = async (e, post, countType)=> {
     const currentClickedStatus = clickedPosts[post._id] || {}
-    console.log('clickstatus', currentClickedStatus)
 
     if ( currentClickedStatus[countType === "count1" ? "count2" : "count1"]) {
       return 
     }
     
-
     if (post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username)){
       return
     }
@@ -61,22 +108,35 @@ useEffect(() => {
       const addVoteUser = await axios.put(`${baseUrl}/posts/${id}`, updateVoteInfo,{
         headers: { Authorization: `Bearer ${tokenServices.getToken()}` }})
         
-        console.log(addVoteUser.data) 
-        const pElement = e.target.nextElementSibling;
-        pElement.innerText = addVoteUser.data.updatedPost[countType].length
-      
+      console.log(addVoteUser.data) 
+      const pElement = e.target.nextElementSibling;
+      pElement.innerText = addVoteUser.data.updatedPost[countType].length
+    
 
-        console.log("updated count:", addVoteUser.data.updatedPost[countType])
+      console.log("updated count:", addVoteUser.data.updatedPost[countType])
 
-        setClickedPosts(prev => ({
-          ...prev,
-          [post._id]: { ...prev[post._id], [countType]: true }
-        }));
+      setClickedPosts(prev => ({
+        ...prev,
+        [post._id]: { ...prev[post._id], [countType]: true }
+      }));
 
-
+      if (countType === 'count1' || countType === 'count2') {
+        const button = e.target; // Assuming e.target is the button itself
+        button.style.color = 'red'; // Change color as needed
+      }
+    
+      setDisplay(currentDisplay =>
+        currentDisplay.map(p =>
+          p._id === post._id
+            ? { ...p, isSelectedCount1: countType === 'count1' ? true : p.isSelectedCount1 }
+            : p
+        )
+      );
     }
     
   }
+
+
 
   return (
     <div>
@@ -85,7 +145,11 @@ useEffect(() => {
 
   {display.map((post, index) =>
   <div key={`post${index}`} className="post-container">
-      <Link to={`/viewpost/${post._id}`} key={post._id}>{post.title}</Link>
+    <div className="post-header">
+      <small className="username">{`@${thisUser.username}`}</small>
+    </div>
+      
+      <Link to={`/viewpost/${post._id}`} key={post._id}><h1>{post.title}</h1></Link>
       <h4  key={post.content}className="post-content">{post.content}</h4>
 
       <div className="choices-container">
@@ -95,7 +159,11 @@ useEffect(() => {
         </div>
           
           <div className="choice-box">
-            <button name="count1" className="choices choice1" key="choice1" 
+            <button name="count1" className={`choices choice1 ${post.isSelectedCount1 ? 'selected' : ''}`} 
+              style={{ 
+                color: post.isSelectedCount1 ? 'red' : 'black' // Change colors as needed
+              }}
+              key="choice1" 
             post={post} data-postid={post._id} onClick={(e) => onClick(e, post, "count1")}
             disabled={clickedPosts[post._id]?.count1 || clickedPosts[post._id]?.count2 || post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
               {post.choice1}
@@ -110,7 +178,11 @@ useEffect(() => {
           </div>
           
           <div className="choice-box">
-            <button className="choices choice2" key="choice2"
+            <button className={`choices choice2 ${post.isSelectedCount2 ? 'selected' : ''}`} 
+              style={{ 
+                color: post.isSelectedCount2 ? 'red' : 'black' // Change colors as needed
+              }}
+              key="choice2"
             post={post} data-postid={post._id}
             onClick={(e) => onClick(e, post, "count2")}
             disabled={clickedPosts[post._id]?.count1 || clickedPosts[post._id]?.count2 || post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
@@ -121,8 +193,18 @@ useEffect(() => {
         </div>
       </div>
 
-  </div>
+      <div className="icon-container">
+        <div className="likes-container">
+          <i className={`${post.isLiked?'fas':'far'} fa-heart`} onClick={(e) => likeHandler(e, post)}></i>
+          <p className="likes-count">{post.likes.length}</p>
+        </div>
+        <div className="comments-container">
+        <i className="far fa-comment"></i>
+        <p className="comments-count">{post.commentId.length}</p>
+        </div>
+      </div>
 
+  </div>
   )}
   </>:
   <p>No Posts</p>
