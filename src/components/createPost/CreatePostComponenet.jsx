@@ -26,6 +26,7 @@ const CreatePost = () => {
             protectedServices.createPost(formData)
             console.log(formData)
             navigate('/profile')
+            await protectedServices.singleProfile()
         } catch (error) {
             throw error
         }

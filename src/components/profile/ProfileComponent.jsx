@@ -13,7 +13,7 @@ const ProfileComponent = ( props ) => {
             setDisplay(profileData.profile[0].postId)
         }
         fetchProfile()
-    },[display])
+    },[])
 
     const [posts, setPosts] = useState([])
 
