@@ -82,11 +82,24 @@ async function createPost(updateInfo){
     }
 }
 
+async function updatePost(id, updateInfo){
+    try {
+        const res = await axios.put(`${baseUrl}/posts/${id}`,updateInfo,{
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+            return res
+    } catch (error) {
+        throw Error(error)
+    }
+}
+
 export{
     getUserProfile,
     createPost,
     getPosts,
     getSinglePost,
+    singleProfile,
+    updatePost,
     getMultiplePosts,
     singleProfile
+
 }
