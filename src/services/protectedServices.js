@@ -38,15 +38,25 @@ async function getPosts(){
     }
 }
 
+async function updatePost(id, updateInfo){
+    try {
+        const res = await axios.put(`${baseUrl}/posts/${id}`,updateInfo, {
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+            return res
+    } catch (error) {
+        throw Error(error)        
+    }
+}
+
 async function getSinglePost(id) {
-    // console.log("ID being passed to getSinglePost:", id) 
     try {
         const res = await axios.get(`${baseUrl}/posts/${id}`, {
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }
         })
+
         return res.data.post
     } catch (error) {
-        console.error("Error in getSinglePost:", error)
+        // console.error("Error in getSinglePost:", error)
         throw error
     }
 }
@@ -109,6 +119,17 @@ async function createPost(updateInfo){
     }
 }
 
+async function deletePost(id){
+    try {
+        const res = await axios.delete(`${baseUrl}/posts/${id}`, {
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+        })
+
+    } catch (error) {
+        throw Error (error)
+    }
+}
+
 
 async function addCommentToId(comment, username, postId){
     // console.log(comment, postId)
@@ -167,8 +188,6 @@ async function getCommentsfromPostId(postId){
 }
 
 
-
-
 export{
     getUserProfile,
     createPost,
@@ -176,6 +195,7 @@ export{
     getSinglePost,
     singleProfile,
     updatePost,
+    deletePost,
     getMultiplePosts,
     addCommentToId,
     getCommentsfromPostId,

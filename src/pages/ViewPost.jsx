@@ -1,11 +1,11 @@
 import { useParams } from 'react-router'
 import ViewSinglePost from '../components/viewSinglePost/ViewSinglePost'
 
-const ViewPost = () => {
+const ViewPost = (user) => {
   const {id} = useParams()
   return (
     <div>
-      <ViewSinglePost id={id}/>
+      <ViewSinglePost user={user} id={id}/>
     </div>
   )
 }
