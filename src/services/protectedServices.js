@@ -51,7 +51,7 @@ async function getSinglePost(id) {
     }
 }
 
-async function updatePostChoice(id, username, choiceField) {
+async function updatePostChoice(id, choiceField, username) {
     const update = {
         $push: { [choiceField]: username }
     };
@@ -61,9 +61,25 @@ async function updatePostChoice(id, username, choiceField) {
         });
         return res.data.post;
     } catch (error) {
-        console.error("Error updating post choice:", error);
-        throw error;
-    }
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.error("Server responded with an error:", error.response.status, error.response.data);
+            throw new Error(`Server Error: ${error.response.status} - ${error.response.data.message || error.response.statusText}`);
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.error("No response received from server:", error.request);
+            throw new Error("No response received from server.");
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error("Error setting up the request:", error.message);
+            throw new Error(`Error in request setup: ${error.message}`);
+        }
+    }   
+    // } catch (error) {
+    //     console.error("Error updating post choice:", error);
+    //     throw error;
+    // }
 }
 
 async function getMultiplePosts(arr){
