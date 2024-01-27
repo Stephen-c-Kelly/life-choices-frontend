@@ -1,9 +1,11 @@
-import {getSinglePost} from '../../services/protectedServices.js'
+import {getSinglePost, updatePost, deletePost} from '../../services/protectedServices.js'
 import { useState, useEffect} from 'react'
 import { getUserFromToken } from '../../services/tokenService.js'
-import { updatePost } from '../../services/protectedServices.js'
+import { useNavigate } from 'react-router'
+
 
 const ViewSinglePost = (props) => {
+  const navigate = useNavigate()
   const [post, setPost] = useState(null)
   const [isEditMode, setIsEditMode] = useState(false)
   const [formData, setFormData] = useState(
@@ -33,8 +35,6 @@ const ViewSinglePost = (props) => {
   const handleSubmit = async e =>{
       e.preventDefault()
       try {
-        console.log('click')
-        console.log(formData, 'form data')
          const update = await updatePost(props.id,formData)
          setIsEditMode(!isEditMode)
           post.title = formData.title
@@ -54,8 +54,14 @@ const ViewSinglePost = (props) => {
     }
   }
   
-const handleDelete = () =>{
-
+const handleDelete = async (e) =>{
+  e.preventDefault()
+  try {
+    const remove = await deletePost(props.id)
+    navigate('/profile')
+  } catch (error) {
+    throw error
+  }
 }
 
   return (
