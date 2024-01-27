@@ -73,7 +73,7 @@ const CreatePost = () => {
         placeholder='choice2'/>
       </div>
       <button disabled={isFormInvalid()}>Share</button>
-      <Link to='/'>Nevermind</Link>
+      <Link to='/homepage'>Nevermind</Link>
     </form>
   )
 }
