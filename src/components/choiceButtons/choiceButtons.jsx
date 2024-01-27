@@ -37,7 +37,7 @@ const handleChoiceClick = async (id, choiceField, username) => {
   try {
     await protectedServices.updatePostChoice(id, choiceField, username)
     setUpdateTrigger(prev => prev + 1)
-    
+   // {/* on vote selection the selected choice needs to change color */}
   } catch (error) {
     console.error("Error in updating choice:", error);
   } 
@@ -59,6 +59,7 @@ return (
           disabled={areButtonsDisabled}
           onClick={() => handleChoiceClick(id, 'count2', username)}>
             {post.choice2 || 'Choice 2'}
+            
         </button>
         <p>{countState2 || 'Votes loading'}</p>
       </>
