@@ -16,6 +16,7 @@ const ViewSinglePost = (props) => {
   }
   )
   const user = getUserFromToken()
+  console.log(user,'user')
 
 
   useEffect(()=>{
@@ -131,10 +132,13 @@ const handleDelete = async (e) =>{
       <div>
         <p>{post? post.username  : 'Loading'}</p>
       </div>
-          {!isEditMode && (
-            <button onClick={toggleEdit}>Edit</button>
-          )}
-          <button onClick={handleDelete}>Delete</button>
+      {post && post.profileId === user.profileId && (
+      <>
+      {!isEditMode && <button onClick={toggleEdit}>Edit</button>}
+      <button onClick={handleDelete}>Delete</button>
+      </>
+      )}
+         
         </>
       ) : (
         <p>Loading...</p>
