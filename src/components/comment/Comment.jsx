@@ -1,22 +1,23 @@
+//
 import { useState, useEffect } from "react";
-import ProfileComponent from "../profile/ProfileComponent";
-import * as protectedServices from '../../services/protectedServices'
-
 import { useParams } from 'react-router'
+//
+import * as protectedServices from '../../services/protectedServices'
 import { getUserFromToken } from "../../services/tokenService";
+//
 import ChoiceButtons from "../choiceButtons/choiceButtons";
+import CommentPosts from "../commentPosts/commentPosts"
 
 const CommentComponent = (props) => {
   const userInfo = getUserFromToken()
-  // props.user.id also works
   const {id} = useParams() 
-
 const [comments, setComments]=useState([])
+const [comment, setComment]=useState(false)
 
-const [comment, setComment]=useState({
-  content: '',
-  username: userInfo.username
-})
+const fetchComments = async (postId) =>{
+  const postComments= await protectedServices.getCommentsfromPostId(postId)
+  setComments(postComments)
+}
 
 // handling comments 
 const [showCommentField, setShowCommentField]=useState(false)
@@ -26,7 +27,7 @@ const toggleAddComment = () => {
 }
 
 const handleAddComment = e => {
-  // setComment({...comment, [e.target.name]: e.target.value})
+  setComment({...comment, [e.target.name]: e.target.value})
 }
 
 const handleSubmitNewComment = async e => {
@@ -40,22 +41,15 @@ const handleSubmitNewComment = async e => {
   }
 }
 
-// displaying comments
-
 useEffect(()=>{
-  const fetchComments = async (postId) =>{
-      const postComments= await protectedServices.getCommentsfromPostId(postId)
-      console.log(`comments from server are:`, postComments)
-      setComments(postComments)
-  }
   fetchComments(id)
-
-}, [], handleAddComment())
+}, [id, comments])
 
 
   return(
     <div>
       <ChoiceButtons  />
+      comments.length ? <CommentPosts comments={comments}/> :
       <div>no comments yet</div>
       <button onClick={toggleAddComment}>Add Comment</button>
         {showCommentField && (

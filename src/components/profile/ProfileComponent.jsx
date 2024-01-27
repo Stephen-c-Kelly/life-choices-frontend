@@ -39,7 +39,7 @@ const ProfileComponent = ( props ) => {
             </h1>
             <div>
             {posts.map((post, index) =>
-                <div key={`post${index}`} className="post-container">
+                <div key={`post${index}`} className='post-container'>
                 <Link to={`/viewpost/${post._id}`} key={post._id}>{post.title}</Link>
                 <h4 key={post.content}className="post-content">{post.content}</h4>
                 </div>)}
