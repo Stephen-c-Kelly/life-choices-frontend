@@ -38,13 +38,13 @@ useEffect(() => {
 
   const onClick = async (e, post, countType)=> {
     const currentClickedStatus = clickedPosts[post._id] || {}
+    
     console.log('clickstatus', currentClickedStatus)
 
     if ( currentClickedStatus[countType === "count1" ? "count2" : "count1"]) {
       return 
     }
     
-
     if (post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username)){
       return
     }

@@ -4,6 +4,7 @@ import * as protectedServices from '../../services/protectedServices'
 
 import { useParams } from 'react-router'
 import { getUserFromToken } from "../../services/tokenService";
+import ChoiceButtons from "../choiceButtons/choiceButtons";
 
 const CommentComponent = (props) => {
   const userInfo = getUserFromToken()
@@ -15,9 +16,14 @@ const [comments, setComments]=useState([])
 const [comment, setComment]=useState({
   content: '',
   username: userInfo.username
-  
 })
 
+
+
+
+
+
+// handling comments 
 const [showCommentField, setShowCommentField]=useState(false)
 
 const toggleAddComment = () => {
@@ -39,18 +45,9 @@ const handleSubmitNewComment = async e => {
   }
 }
 
-// useEffect((id)=>{
-//   const fetchComments = async (id) =>{
-//     const commentData = await protectedServices. getCommentsfromPostId(id) 
-//     setComments(commentData)
-//   }
-//   fetchComments(id)
-//   console.log(`comments are:`, comments)
-  
-// },[])
-
   return(
     <div>
+      <ChoiceButtons  />
       <div>no comments yet</div>
       <button onClick={toggleAddComment}>Add Comment</button>
         {showCommentField && (

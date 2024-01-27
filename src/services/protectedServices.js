@@ -39,17 +39,30 @@ async function getPosts(){
 }
 
 async function getSinglePost(id) {
-    console.log("ID being passed to getSinglePost:", id) // Log the ID to check its value
-
+    // console.log("ID being passed to getSinglePost:", id) 
     try {
         const res = await axios.get(`${baseUrl}/posts/${id}`, {
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }
         })
-        console.log(res, 'this is your res')
         return res.data.post
     } catch (error) {
         console.error("Error in getSinglePost:", error)
         throw error
+    }
+}
+
+async function updatePostChoice(id, username, choiceField) {
+    const update = {
+        $push: { [choiceField]: username }
+    };
+    try {
+        const res = await axios.put(`${baseUrl}/posts/${id}`, update, {
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+        });
+        return res.data.post;
+    } catch (error) {
+        console.error("Error updating post choice:", error);
+        throw error;
     }
 }
 
@@ -81,7 +94,7 @@ async function createPost(updateInfo){
 }
 
 async function addCommentToId(comment, username, postId){
-    console.log(comment, postId)
+    // console.log(comment, postId)
     try{
         const res = await axios.post(`${baseUrl}/comments`, {
             comment: comment,
@@ -129,5 +142,6 @@ export{
     getMultiplePosts,
     addCommentToId,
     getCommentsfromPostId,
-    singleProfile
+    singleProfile,
+    updatePostChoice
 }
