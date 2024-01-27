@@ -62,7 +62,7 @@ const ViewSinglePost = (props) => {
 const handleDelete = async (e) =>{
   e.preventDefault()
   try {
-    const remove = await deletePost(props.id)
+    const remove = await deletePost(user.profileId,props.id)
     navigate('/profile')
   } catch (error) {
     throw error

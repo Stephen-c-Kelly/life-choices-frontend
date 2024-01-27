@@ -119,9 +119,9 @@ async function createPost(updateInfo){
     }
 }
 
-async function deletePost(id){
+async function deletePost(profileId,postId){
     try {
-        const res = await axios.delete(`${baseUrl}/posts/${id}`, {
+        const res = await axios.delete(`${baseUrl}/posts/${profileId}/${postId}`, {
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }
         })
 
