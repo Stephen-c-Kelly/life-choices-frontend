@@ -54,7 +54,6 @@ async function getSinglePost(id) {
 }
 
 async function getMultiplePosts(arr){
-    console.log(`arr being passed:`, arr)
     try {
         const requests = arr.map(id=>{
             return axios.get(`${baseUrl}/posts/${id}`, {
@@ -63,7 +62,6 @@ async function getMultiplePosts(arr){
         )})
 
         const responses = await Promise.all(requests);
-        console.log(`posts`, responses);
 
         return responses.map(res => res.data.post)
     } catch (error) {
@@ -100,15 +98,26 @@ async function addCommentToId(comment, username, postId){
 }
 
 async function getCommentsfromPostId(postId){
-    
-    try{
+    // try{
+    //     const res = await axios.post(`${baseUrl}/posts/${postId}`)
+
+    //     const requests = arr.map(id=>{
+    //         return axios.get(`${baseUrl}/posts/${id}`, {
+    //             headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+    //         })
+    //     })
+    //     const responses = await Promise.all(requests);
+    //     console.log(`all comments for this post:`, responses)
+        
+    //     return responses.map(res=>res.data.post)
+    //      } catch (error) {
+    //         console.error("Error in getCommentsfromPostId:", error);
+    //         throw error;}
+
+        
     // axios call to look through all Profiles and see if they have all comments with this post 
     // maybe do a promise.all to tie it all together. output as an array of comments
     // 
-
-    } catch (error) {
-        throw Error(error)
-    }
 }
 
 
