@@ -1,10 +1,12 @@
 import {getSinglePost} from '../../services/protectedServices.js'
+import CommentComponent from '../comment/Comment.jsx'
+
 import { useState, useEffect} from 'react'
 
 const ViewSinglePost = (props) => {
   //set to null because it's an empty object 
   const [post, setPost] = useState(null)
-  console.log(props.id)
+  // console.log(props.id)
 
   useEffect(()=>{
     const fetchSingle = async () => {
@@ -21,7 +23,7 @@ const ViewSinglePost = (props) => {
   // console.log(post, 'middle');
 
   useEffect(() => {
-    console.log(post, 'updated post state');
+    // console.log(post, 'updated poeest state');
   }, [post])
 
   
@@ -57,6 +59,8 @@ const ViewSinglePost = (props) => {
       <div>
         <p>{post? post.username  : 'Loading'}</p>
       </div>
+      
+      <CommentComponent props={props} />
     </div>
   )
 }

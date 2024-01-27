@@ -39,13 +39,11 @@ async function getPosts(){
 }
 
 async function getSinglePost(id) {
-    console.log("ID being passed to getSinglePost:", id) // Log the ID to check its value
-
+    // console.log("ID being passed to getSinglePost:", id) 
     try {
         const res = await axios.get(`${baseUrl}/posts/${id}`, {
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }
         })
-        console.log(res, 'this is your res')
         return res.data.post
     } catch (error) {
         console.error("Error in getSinglePost:", error)
@@ -53,8 +51,38 @@ async function getSinglePost(id) {
     }
 }
 
+async function updatePostChoice(id, choiceField, username) {
+    const update = {
+        $push: { [choiceField]: username }
+    };
+    try {
+        const res = await axios.put(`${baseUrl}/posts/${id}`, update, {
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+        });
+        return res.data.post;
+    } catch (error) {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.error("Server responded with an error:", error.response.status, error.response.data);
+            throw new Error(`Server Error: ${error.response.status} - ${error.response.data.message || error.response.statusText}`);
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.error("No response received from server:", error.request);
+            throw new Error("No response received from server.");
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error("Error setting up the request:", error.message);
+            throw new Error(`Error in request setup: ${error.message}`);
+        }
+    }   
+    // } catch (error) {
+    //     console.error("Error updating post choice:", error);
+    //     throw error;
+    // }
+}
+
 async function getMultiplePosts(arr){
-    console.log(`arr being passed:`, arr)
     try {
         const requests = arr.map(id=>{
             return axios.get(`${baseUrl}/posts/${id}`, {
@@ -63,7 +91,6 @@ async function getMultiplePosts(arr){
         )})
 
         const responses = await Promise.all(requests);
-        console.log(`posts`, responses);
 
         return responses.map(res => res.data.post)
     } catch (error) {
@@ -82,15 +109,57 @@ async function createPost(updateInfo){
     }
 }
 
+
+async function addCommentToId(comment, username, postId){
+    // console.log(comment, postId)
+    try{
+        const res = await axios.post(`${baseUrl}/comments`, {
+            comment: comment,
+            username: username,
+            postId: postId },
+            { 
+                headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+            })
+        return res 
+        
+
 async function updatePost(id, updateInfo){
     try {
         const res = await axios.put(`${baseUrl}/posts/${id}`,updateInfo,{
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
             return res
+
     } catch (error) {
         throw Error(error)
     }
 }
+
+
+async function getCommentsfromPostId(postId){
+    // try{
+    //     const res = await axios.post(`${baseUrl}/posts/${postId}`)
+
+    //     const requests = arr.map(id=>{
+    //         return axios.get(`${baseUrl}/posts/${id}`, {
+    //             headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+    //         })
+    //     })
+    //     const responses = await Promise.all(requests);
+    //     console.log(`all comments for this post:`, responses)
+        
+    //     return responses.map(res=>res.data.post)
+    //      } catch (error) {
+    //         console.error("Error in getCommentsfromPostId:", error);
+    //         throw error;}
+
+        
+    // axios call to look through all Profiles and see if they have all comments with this post 
+    // maybe do a promise.all to tie it all together. output as an array of comments
+    // 
+}
+
+
+
 
 export{
     getUserProfile,
@@ -100,6 +169,11 @@ export{
     singleProfile,
     updatePost,
     getMultiplePosts,
+    addCommentToId,
+    getCommentsfromPostId,
+    singleProfile,
+    updatePostChoice,
     singleProfile
+
 
 }

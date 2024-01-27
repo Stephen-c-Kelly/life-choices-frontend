@@ -86,6 +86,7 @@ const ViewPostComponent = () => {
   const onClick = async (e, post, countType)=> {
     const currentClickedStatus = clickedPosts[post._id] || {}
 
+
     if ( currentClickedStatus[countType === "count1" ? "count2" : "count1"]) {
       return 
     }
