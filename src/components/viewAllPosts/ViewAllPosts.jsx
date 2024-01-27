@@ -79,7 +79,7 @@ useEffect(() => {
   }
 
   return (
-    <div>
+    <div className="container">
    {display.length ? 
   <>
 

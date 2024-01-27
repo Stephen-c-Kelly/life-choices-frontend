@@ -1,8 +1,21 @@
+body{
+  background-color: white;
+  height: 100vh;
+}
+
+.container{
+  overflow: scroll;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+
 /* General styling for post container */
 .post-container {
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
+    background-color: lightgray;
     border-radius: 8px;
   }
   
@@ -29,13 +42,14 @@
 
   /*  to make image in a fixed size frame */
   .image-container {
-    width: 200px; /* Fixed width for the frame */
-    height: 250px; /* Fixed height for the frame */
-    overflow: hidden; /* Hide the parts of the image that overflow the container */
-    display: flex; /* Ensures the image stays within the container */
-    justify-content: center; /* Center image horizontally in the container */
-    align-items: center; /* Center image vertically in the container */
-  }
+  width: 200px; /* Fixed width for the frame */
+  /* Remove height property */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
   
   .post-image {
     /* Ensure the image spans the full width of the container */
