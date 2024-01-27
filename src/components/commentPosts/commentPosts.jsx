@@ -1,7 +1,7 @@
 import './commentPosts.css'
 
 const CommentPosts = ({comments}) => {
-  console.log(`comments from comment post`, comments)
+  
   return (
     <div className='comments-list'>
       {comments.map((comment, index) =>
@@ -11,7 +11,6 @@ const CommentPosts = ({comments}) => {
         <h4>{comment.content}</h4>
       </div>
       )}
-
     </div>
   )
 }

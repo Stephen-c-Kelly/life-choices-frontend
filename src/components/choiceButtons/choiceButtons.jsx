@@ -53,14 +53,14 @@ return (
           onClick={() => handleChoiceClick(id, 'count1', username)}>
             {post.choice1 || 'Choice 1'}
         </button>
-        <p>{countState1 || 'Votes loading'}</p>
+        <p>{countState1 || '0'}</p>
         <button
           className="choice-button choice2"
           disabled={areButtonsDisabled}
           onClick={() => handleChoiceClick(id, 'count2', username)}>
             {post.choice2 || 'Choice 2'}
         </button>
-        <p>{countState2 || 'Votes loading'}</p>
+        <p>{countState2 || '0'}</p>
       </>
     ) : (
       <p>Loading...</p>
