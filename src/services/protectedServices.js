@@ -120,7 +120,15 @@ async function addCommentToId(comment, username, postId){
             { 
                 headers: { Authorization: `Bearer ${tokenService.getToken()}` }
             })
+        
         return res 
+    }catch (error){
+        throw Error(error)
+    }
+
+}
+    
+    
         
 
 async function updatePost(id, updateInfo){
@@ -171,9 +179,5 @@ export{
     getMultiplePosts,
     addCommentToId,
     getCommentsfromPostId,
-    singleProfile,
     updatePostChoice,
-    singleProfile
-
-
 }
