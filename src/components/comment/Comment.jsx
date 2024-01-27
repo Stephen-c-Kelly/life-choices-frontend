@@ -18,11 +18,6 @@ const [comment, setComment]=useState({
   username: userInfo.username
 })
 
-
-
-
-
-
 // handling comments 
 const [showCommentField, setShowCommentField]=useState(false)
 
@@ -31,7 +26,7 @@ const toggleAddComment = () => {
 }
 
 const handleAddComment = e => {
-  setComment({...comment, [e.target.name]: e.target.value})
+  // setComment({...comment, [e.target.name]: e.target.value})
 }
 
 const handleSubmitNewComment = async e => {
@@ -46,6 +41,16 @@ const handleSubmitNewComment = async e => {
 }
 
 // displaying comments
+
+useEffect(()=>{
+  const fetchComments = async (postId) =>{
+      const postComments= await protectedServices.getComments(postId)
+      console.log(`comments from server are:`, postComments)
+      setComments(postComments)
+  }
+  fetchComments(postId)
+
+}, [], handleAddComment())
 
 
   return(

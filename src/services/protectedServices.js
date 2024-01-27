@@ -199,5 +199,5 @@ export{
     getMultiplePosts,
     addCommentToId,
     getCommentsfromPostId,
-    updatePostChoice,
+    updatePostChoice
 }
