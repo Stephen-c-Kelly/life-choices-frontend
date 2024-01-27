@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ProfileComponent from "../profile/ProfileComponent";
+import * as protectedServices from '../../services/protectedServices'
 
 import { useParams } from 'react-router'
 import { getUserFromToken } from "../../services/tokenService";
@@ -20,22 +21,27 @@ const [comment, setComment]=useState({
   
 })
 
-const handleAddComment = e => {
-  setFormData({...comment, [e.target.name]: e.target.value})
+const [showCommentField, setShowCommentField]=useState(false)
+
+const toggleAddComment = () => {
+  setShowCommentField(!showCommentField)
 }
+
+const handleAddComment = e => {
+  setComment({...comment, [e.target.name]: e.target.value})
+}
+console.log(`comment is now`, comment.content, comment.username)
 
 const handleSubmitNewComment = async e => {
   e.preventDefault()
   try{
-    protectedServices.createComment(comment, postId)
+    protectedServices.addCommentToId(comment.content, comment.username, id)
     console.log(`comment added:`, comment)
-    navigate(`*/viewpost/{id}`)
+    // navigate(`*/viewpost/{id}`)
   } catch (error){
     throw error
   }
 }
-
-// console.log(`post id is`, postId)
 
 useEffect((id)=>{
   const fetchComments = async () =>{
@@ -44,15 +50,23 @@ useEffect((id)=>{
 },[])
 
 const addComment = async () => {
-
 }
-
-
 
   return(
     <div>
-      no comments yet
-      <button>add comment</button>
+      <div>no comments yet</div>
+      <button onClick={toggleAddComment}>Add Comment</button>
+        {showCommentField && (
+            <form onSubmit={handleSubmitNewComment}>
+                <textarea
+                    name="content"
+                    value={comment.content}
+                    onChange={handleAddComment}
+                    placeholder="Write your comment here"
+                />
+                <button type="submit">Submit Comment</button>
+            </form>
+        )}
     </div>
   )
 }

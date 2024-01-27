@@ -82,13 +82,17 @@ async function createPost(updateInfo){
     }
 }
 
-async function addCommenttoId(postId){
-    // ID = USE PARAMS TO GRAB
+async function addCommentToId(comment, username, postId){
+    console.log(comment, postId)
     try{
-      // 1 - create comment
-      // 1.5 save comment id
-      // 2 - add comment id to post with  
-      // you can also add comment id to post in the backend. 
+        const res = await axios.post(`${baseUrl}/comments`, {
+            comment: comment,
+            username: username,
+            postId: postId },
+            { 
+                headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+            })
+        return res 
         
     } catch (error) {
         throw Error(error)
@@ -114,7 +118,7 @@ export{
     getPosts,
     getSinglePost,
     getMultiplePosts,
-    addCommenttoId,
+    addCommentToId,
     getCommentsfromPostId,
     singleProfile
 }
