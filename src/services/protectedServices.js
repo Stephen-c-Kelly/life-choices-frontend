@@ -2,8 +2,8 @@
 import * as tokenService from './tokenService'
 import axios from 'axios'
 
-const baseUrl = `http://localhost:3000`
-// const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
+// const baseUrl = `http://localhost:3000`
+const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
 
 async function getUserProfile(){
     try {
@@ -53,11 +53,30 @@ async function getSinglePost(id) {
     }
 }
 
+async function getMultiplePosts(arr){
+    console.log(`arr being passed:`, arr)
+    try {
+        const requests = arr.map(id=>{
+            return axios.get(`${baseUrl}/posts/${id}`, {
+                headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+            }
+        )})
+
+        const responses = await Promise.all(requests);
+        console.log(`posts`, responses);
+
+        return responses.map(res => res.data.post)
+    } catch (error) {
+        console.error("Error in getMultiplePosts:", error);
+        throw error;}
+}
+
 async function createPost(updateInfo){
     try {
         const res = await axios.post(`${baseUrl}/posts`,updateInfo,{
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
             return res
+        
     } catch (error) {
         throw Error(error)
     }
@@ -79,5 +98,8 @@ export{
     getPosts,
     getSinglePost,
     singleProfile,
-    updatePost
+    updatePost,
+    getMultiplePosts,
+    singleProfile
+
 }
