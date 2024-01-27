@@ -13,14 +13,21 @@ const CommentComponent = (props) => {
   const {id} = useParams() 
 const [comments, setComments]=useState([])
 const [comment, setComment]=useState(false)
-
-const fetchComments = async (postId) =>{
-  const postComments= await protectedServices.getCommentsfromPostId(postId)
-  setComments(postComments)
-}
-
-// handling comments 
+const [commentSubmitted, setCommentSubmitted] = useState(false)
 const [showCommentField, setShowCommentField]=useState(false)
+
+
+useEffect(()=>{
+  const fetchComments = async (postId) =>{
+    const postComments= await protectedServices.getCommentsfromPostId(postId)
+    setComments(postComments)
+    setCommentSubmitted(false)
+  }
+
+  fetchComments(id)
+}, [id, commentSubmitted])
+// used to say comments too, which triggered the infinite loop
+
 
 const toggleAddComment = () => {
   setShowCommentField(!showCommentField)
@@ -35,18 +42,13 @@ const handleSubmitNewComment = async e => {
   try{
     protectedServices.addCommentToId(comment.content, comment.username, id)
     console.log(`comment added:`, comment)
-    
+    setCommentSubmitted(true)
   } catch (error){
     throw error
   }
 }
 
-useEffect(()=>{
-  fetchComments(id)
-}, [id, comments])
-
-
-  return(
+  return (
     <div>
       <ChoiceButtons  />
       comments.length ? <CommentPosts comments={comments}/> :

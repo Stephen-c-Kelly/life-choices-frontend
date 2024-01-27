@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getUserFromToken } from "../../services/tokenService";
 import { useParams } from "react-router";
 import * as protectedServices from '../../services/protectedServices' 
-
+import './choiceButtons.css'
 
 //handling choice buttons
 const ChoiceButtons = (props) => {
@@ -15,6 +15,7 @@ const [areButtonsDisabled, setDisableChoiceBtnsForUser] = useState(false);
 const [countState1, setCountState1] = useState(0);
 const [countState2, setCountState2] = useState(0);
 const [updateTrigger, setUpdateTrigger] = useState(0);
+const [clickedButton, setClickedButton] = useState(null)
 
 useEffect(() => {
   const fetchPost = async () => {
@@ -28,7 +29,7 @@ useEffect(() => {
     }
   };
   fetchPost();
-}, [id, updateTrigger]);
+}, [ updateTrigger]);
 
 console.lo
 
@@ -37,6 +38,7 @@ const handleChoiceClick = async (id, choiceField, username) => {
   try {
     await protectedServices.updatePostChoice(id, choiceField, username)
     setUpdateTrigger(prev => prev + 1)
+    setClickedButton(choiceField)
     
   } catch (error) {
     console.error("Error in updating choice:", error);
@@ -48,14 +50,14 @@ return (
       <>
         <h2>Vote Here</h2>
         <button
-          className="choice-button choice1"
+          className={`choice-button choice1 ${clickedButton === 'count1' ? 'red-text' : ''}`}
           disabled={areButtonsDisabled}
           onClick={() => handleChoiceClick(id, 'count1', username)}>
             {post.choice1 || 'Choice 1'}
         </button>
         <p>{countState1 || '0'}</p>
         <button
-          className="choice-button choice2"
+          className={`choice-button choice2 ${clickedButton === 'count2' ? 'red-text' : ''}`}
           disabled={areButtonsDisabled}
           onClick={() => handleChoiceClick(id, 'count2', username)}>
             {post.choice2 || 'Choice 2'}
