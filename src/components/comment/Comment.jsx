@@ -45,6 +45,9 @@ const handleSubmitNewComment = async e => {
   }
 }
 
+// displaying comments
+
+
   return(
     <div>
       <ChoiceButtons  />
