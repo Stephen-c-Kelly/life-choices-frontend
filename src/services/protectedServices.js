@@ -75,8 +75,27 @@ async function createPost(updateInfo){
     try {
         const res = await axios.post(`${baseUrl}/posts`,updateInfo,{
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+            return res 
+    } catch (error) {
+        throw Error(error)
+    }
+}
+
+async function updatePost(id, updateInfo){
+    try {
+        const res = await axios.put(`${baseUrl}/posts/${id}`,updateInfo,{
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
             return res
-        
+    } catch (error) {
+        throw Error(error)
+    }
+}
+
+async function updatePost(id, updateInfo){
+    try {
+        const res = await axios.put(`${baseUrl}/posts/${id}`,updateInfo,{
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+            return res
     } catch (error) {
         throw Error(error)
     }
@@ -88,5 +107,6 @@ export{
     getPosts,
     getSinglePost,
     getMultiplePosts,
-    singleProfile
+    singleProfile,
+    updatePost
 }
