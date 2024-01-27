@@ -1,4 +1,5 @@
 import {getSinglePost, updatePost, deletePost} from '../../services/protectedServices.js'
+import CommentComponent from '../comment/Comment.jsx'
 import { useState, useEffect} from 'react'
 import { getUserFromToken } from '../../services/tokenService.js'
 import { useNavigate } from 'react-router'
@@ -16,6 +17,7 @@ const ViewSinglePost = (props) => {
   )
   const user = getUserFromToken()
 
+
   useEffect(()=>{
     const fetchSingle = async () => {
       try {
@@ -32,6 +34,7 @@ const ViewSinglePost = (props) => {
     setFormData({...formData, [e.target.name]: e.target.value})
   }
 
+
   const handleSubmit = async e =>{
       e.preventDefault()
       try {
@@ -43,6 +46,7 @@ const ViewSinglePost = (props) => {
           throw error
       }
   }
+
 
   const toggleEdit = ()=>{
     setIsEditMode(!isEditMode)
@@ -135,6 +139,7 @@ const handleDelete = async (e) =>{
       ) : (
         <p>Loading...</p>
       )}
+      <CommentComponent props={props} />
     </div>
   )
 }
