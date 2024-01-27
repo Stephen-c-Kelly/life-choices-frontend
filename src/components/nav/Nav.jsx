@@ -25,6 +25,9 @@ const Nav = (props) => {
               <Link className="nav-link" to="/profile">Profile</Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/newpost">New Post</Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/homepage">Home</Link>
             </li>
             <li className="nav-item">
