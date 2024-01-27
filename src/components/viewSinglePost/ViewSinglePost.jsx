@@ -69,6 +69,13 @@ const handleDelete = async (e) =>{
   }
 }
 
+const formatDate = (created)=>{
+  const date = new Date(created)
+  const day = date.getDate().toString().padStart(2, 0)
+  const month = (date.getMonth()+ 1).toString().padStart(2,0)
+  const year = date.getFullYear()
+  return `${month}/${day}/${year}`
+}
   return (
     <div>
       {post ? (
@@ -107,30 +114,14 @@ const handleDelete = async (e) =>{
               </div>
             </>
           )}
-
       <div>
-        <p>{post? post.choice1 : 'Loading'}</p>
+        <p>{post? post.username  : 'Loading'}</p>
       </div>
       <div>
-        <p>{post? post.count1 : 'Loading'}</p>
-      </div>
-      <div>
-        <p>{post? post.choice2 : 'Loading'}</p>
-      </div>
-      <div>
-        <p>{post? post.count2 : 'Loading'}</p>
+        <p>{post? formatDate(post.updatedAt) : 'Loading'}</p>
       </div>
       <div>
         <p>{post? post.img : 'Loading'}</p>
-      </div>
-      <div>
-        <p>{post? post.updatedAt : 'Loading'}</p>
-      </div>
-      <div>
-        <p>{post? post.profileId  : 'Loading'}</p>
-      </div>
-      <div>
-        <p>{post? post.username  : 'Loading'}</p>
       </div>
       {post && post.profileId === user.profileId && (
       <>
