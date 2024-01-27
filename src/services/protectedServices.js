@@ -48,18 +48,6 @@ async function updatePost(id, updateInfo){
     }
 }
 
-// async function updatePost(id, updateInfo){
-//     try {
-//         const res = await axios.put(`${baseUrl}/posts/${id}`,updateInfo,{
-//             headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
-//             return res
-
-//     } catch (error) {
-//         throw Error(error)
-//     }
-// }
-
-
 async function getSinglePost(id) {
     try {
         const res = await axios.get(`${baseUrl}/posts/${id}`, {
@@ -165,6 +153,17 @@ async function addCommentToId(comment, username, postId){
 
 
 async function getCommentsfromPostId(postId){
+    const res = await axios.get(`${baseUrl}/comments`, {
+        headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+    })
+    console.log(`array from getCommentsfromPostId get coments`, res.data.comments)
+    
+    const response = await getSinglePost(postId)
+
+    console.log(`post info:`, response.commentId)
+
+    
+
     // try{
     //     const res = await axios.post(`${baseUrl}/posts/${postId}`)
 

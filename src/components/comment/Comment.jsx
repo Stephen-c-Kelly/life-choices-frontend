@@ -44,11 +44,11 @@ const handleSubmitNewComment = async e => {
 
 useEffect(()=>{
   const fetchComments = async (postId) =>{
-      const postComments= await protectedServices.getComments(postId)
+      const postComments= await protectedServices.getCommentsfromPostId(postId)
       console.log(`comments from server are:`, postComments)
       setComments(postComments)
   }
-  fetchComments(postId)
+  fetchComments(id)
 
 }, [], handleAddComment())
 
