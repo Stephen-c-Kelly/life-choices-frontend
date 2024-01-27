@@ -63,3 +63,34 @@
     margin: 10px 0;
   }
   
+
+  /* style for icon container */
+
+  .icon-container{
+    display: flex;
+    justify-content: center;
+  }
+  .likes-container, .comments-container{
+    margin:0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+.likes-count, .comments-count, i{
+  margin:5px
+}
+
+/* style the username */
+
+.post-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.username {
+  margin-right: 10px; /* Adjust as needed */
+  /* other styling as needed */
+}

@@ -2,8 +2,8 @@
 import * as tokenService from './tokenService'
 import axios from 'axios'
 
-const baseUrl = `http://localhost:3000`
-// const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
+// const baseUrl = `http://localhost:3000`
+const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
 
 async function getUserProfile(){
     try {
@@ -109,6 +109,7 @@ async function createPost(updateInfo){
     }
 }
 
+
 async function addCommentToId(comment, username, postId){
     // console.log(comment, postId)
     try{
@@ -121,10 +122,18 @@ async function addCommentToId(comment, username, postId){
             })
         return res 
         
+
+async function updatePost(id, updateInfo){
+    try {
+        const res = await axios.put(`${baseUrl}/posts/${id}`,updateInfo,{
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+            return res
+
     } catch (error) {
         throw Error(error)
     }
 }
+
 
 async function getCommentsfromPostId(postId){
     // try{
@@ -150,14 +159,21 @@ async function getCommentsfromPostId(postId){
 }
 
 
+
+
 export{
     getUserProfile,
     createPost,
     getPosts,
     getSinglePost,
+    singleProfile,
+    updatePost,
     getMultiplePosts,
     addCommentToId,
     getCommentsfromPostId,
     singleProfile,
-    updatePostChoice
+    updatePostChoice,
+    singleProfile
+
+
 }
