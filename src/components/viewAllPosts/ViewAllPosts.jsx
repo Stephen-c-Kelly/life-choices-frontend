@@ -6,8 +6,8 @@ import * as tokenServices from '../../services/tokenService.js'
 
 // import './viewAllPosts.css' // Murad please change the css files.
 
-const baseUrl = `http://localhost:3000`
-//const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
+// const baseUrl = `http://localhost:3000`
+const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
 
 
 const ViewPostComponent = () => {
@@ -84,52 +84,42 @@ const ViewPostComponent = () => {
     }
   }
 
-  const onClick = async (e, post, countType)=> {
-    
-    if (post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username)){
-      return
+  const onClick = async (e, post, countType) => {
+    // Prevent further voting if the user has already voted
+    if (post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username)) {
+      return;
     }
-
-    // if (countN.replace('count','') == 1 && !post.count1.includes(thisUser.username) )
-    if (!post[countType].includes(thisUser.username))
-    {
-      const updateVoteInfo = { $push:
-        {[countType]:thisUser.username},
+  
+    // Logic to handle the vote
+    if (!post[countType].includes(thisUser.username)) {
+      try {
+        // Update the vote on the server
+        const updateVoteInfo = { $push: { [countType]: thisUser.username } };
+        await axios.put(`${baseUrl}/posts/${post._id}`, updateVoteInfo, {
+          headers: { Authorization: `Bearer ${tokenServices.getToken()}` }
+        });
+  
+        // Create a new post object with the updated vote
+        const newPost = { ...post };
+        newPost[countType].push(thisUser.username);
+  
+        // Update the local state to reflect the new vote
+        setDisplay(currentDisplay =>
+          currentDisplay.map(p =>
+            p._id === post._id
+              ? { ...p, [countType]: [...p[countType], thisUser.username],
+                  isSelectedCount1: countType === 'count1' ? true : false,
+                  isSelectedCount2: countType === 'count2' ? true : false }
+              : p
+          )
+        );
+  
+      } catch (error) {
+        console.error('Error updating vote:', error);
       }
-      console.log(updateVoteInfo)
-      const id = e.target.dataset.postid
-      // console.log(post.count1.includes(thisUser), 'includes the thisUser?')
-      const addVoteUser = await axios.put(`${baseUrl}/posts/${id}`, updateVoteInfo,{
-        headers: { Authorization: `Bearer ${tokenServices.getToken()}` }})
-        
-      console.log(addVoteUser.data) 
-      const pElement = e.target.nextElementSibling;
-      pElement.innerText = addVoteUser.data.updatedPost[countType].length
-    
-
-      console.log("updated count:", addVoteUser.data.updatedPost[countType])
-
-
-      if (countType === 'count1' || countType === 'count2') {
-        const button = e.target; // Assuming e.target is the button itself
-        button.style.color = 'red'; // Change color as needed
-        button.style.backgroundColor = 'grey'
-
-
-      }
-    
-      setDisplay(currentDisplay =>
-        currentDisplay.map(p =>
-          p._id === post._id
-            ? { ...p,             
-              isSelectedCount1: countType === 'count1' ? true : p.isSelectedCount1,
-              isSelectedCount2: countType === 'count2' ? true : p.isSelectedCount2,  }
-            : p
-        )
-      );
     }
-    
   }
+  
 console.log(display)
 
 
@@ -159,9 +149,9 @@ console.log(display)
             <button name="count1" className={`choices choice1 ${post.isSelectedCount1 ? 'selected' : ''}`} 
               style={{ 
                 color: post.isSelectedCount1 ? 'red' : 'black',
-                backgroundColor: post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) ? 'grey' : null,
-                backgroundColor: post.isSelectedCount1 || post.isSelectedCount2 ? 'grey' : null // Change colors as needed
+                backgroundColor: (post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username)) ? 'grey' : null
               }}
+              
               key="choice1" 
               post={post} data-postid={post._id} onClick={(e) => onClick(e, post, "count1")}
               disabled={ post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
@@ -180,8 +170,7 @@ console.log(display)
             <button className={`choices choice2 ${post.isSelectedCount2 ? 'selected' : ''}`} 
               style={{ 
                 color: post.isSelectedCount2 ? 'red' : 'black',
-                backgroundColor: post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) ? 'grey' : null,
-                backgroundColor: post.isSelectedCount1 || post.isSelectedCount2 ? 'grey' : null // Change colors as needed
+                backgroundColor: (post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username)) ? 'grey' : null
               }}
               key="choice2"
               post={post} data-postid={post._id}
@@ -218,6 +207,3 @@ console.log(display)
 }
 
 export default ViewPostComponent
-
-
-
