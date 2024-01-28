@@ -25,18 +25,20 @@ useEffect(() => {
       setCountState1(postData.count1.length)
       setCountState2(postData.count2.length)
 
-      if (postData.count1.includes(username) || postData.count2.includes(username)) {
+      if (postData.count1.includes(username)) {
         setDisableChoiceBtnsForUser(true);
+        setClickedButton('count1'); 
+      } else if (postData.count2.includes(username)) {
+        setDisableChoiceBtnsForUser(true);
+        setClickedButton('count2'); 
       }
     } catch (error) {
       console.error("Error fetching post:", error);
     }
   };
   fetchPost();
-}, [ updateTrigger]);
-console.log(post, 'test')
-console.log(countState1)
-console.log(countState2)
+}, [id, updateTrigger, username]); // Include all dependencies here
+
 
 const handleChoiceClick = async (id, choiceField, username) => {
   setDisableChoiceBtnsForUser(true)
@@ -56,6 +58,10 @@ return (
         <h2>Vote Here</h2>
         <button
           className={`choice-button choice1 ${clickedButton === 'count1' ? 'red-text' : ''}`}
+          style={{ 
+            backgroundColor: areButtonsDisabled ? 'grey' : '', 
+            color: clickedButton === 'count1' ? 'red' : 'initial'
+          }}
           disabled={areButtonsDisabled}
           onClick={() => handleChoiceClick(id, 'count1', username)}>
             {post.choice1 || 'Choice 1'}
@@ -63,6 +69,10 @@ return (
         <p>{countState1 || '0'}</p>
         <button
           className={`choice-button choice2 ${clickedButton === 'count2' ? 'red-text' : ''}`}
+          style={{ 
+            backgroundColor: areButtonsDisabled ? 'grey' : '', 
+            color: clickedButton === 'count2' ? 'red' : 'initial'
+          }}
           disabled={areButtonsDisabled}
           onClick={() => handleChoiceClick(id, 'count2', username)}>
             {post.choice2 || 'Choice 2'}
