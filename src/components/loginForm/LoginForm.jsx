@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom'
 
 import * as authService from '../../services/authService.js'
 
+import './LoginForm.css'
 //import auth here 
 
 const LoginForm = (props) => {
@@ -60,7 +61,7 @@ const LoginForm = (props) => {
         <button>Log In</button>
       </div>
       <div>
-        <p>Or Sign Up using this link <Link to="/signup"> Register</Link>
+        <p>Or Sign Up using this link <Link className="link" to="/signup"> Register</Link>
         </p>
       </div>
       {/* this makes the error message appear*/}

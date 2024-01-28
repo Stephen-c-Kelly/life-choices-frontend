@@ -43,10 +43,9 @@ const ProfileComponent = ( props ) => {
                 <h4 key={post.content}className="post-content">{post.content}</h4>
                 </div>)}
                 
-           </div>
+        </div>
            {/* this code could use some refactoring, adding choice titles and votes on the page. */}
 
-           
         {/* <div>
             {display.map((post, index) =>
             

@@ -138,7 +138,7 @@ console.log(display)
 
 
   return (
-    <div>
+    <div className="container">
    {display.length ? 
   <>
 
