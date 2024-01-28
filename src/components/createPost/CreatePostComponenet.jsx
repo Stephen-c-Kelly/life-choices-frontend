@@ -1,3 +1,4 @@
+import '/Users/muradmansour/code/seb/projects/life-choices-frontend/src/components/createPost/CreatePostComponent.css'
 import * as protectedServices from '../../services/protectedServices.js'
 import { getUserFromToken } from '../../services/tokenService.js'
 import {Link, useNavigate} from 'react-router-dom'
