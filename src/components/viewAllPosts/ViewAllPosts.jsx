@@ -5,7 +5,6 @@ import * as tokenServices from '../../services/tokenService.js'
 
 // import './viewAllPosts.css' // Murad please change the css files.
 
-
 const ViewPostComponent = () => {
   const [display, setDisplay] = useState([])
   const [clickedPosts, setClickedPosts] = useState({})
