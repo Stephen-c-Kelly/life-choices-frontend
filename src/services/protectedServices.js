@@ -29,6 +29,16 @@ async function singleProfile(){
     }
 }
 
+async function userProfile(user){
+    try{
+        const res = await axios.get(`${baseUrl}/profiles/${user}`,{headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+        //console.log(res.json(), 'res')
+        return res.data
+    }catch{
+        throw Error
+    }
+}
+
 async function getPosts(){
     try {
         const res = await axios.get(`${baseUrl}/posts`,{
@@ -133,7 +143,6 @@ async function deletePost(profileId,postId){
 
 
 async function addCommentToId(comment, username, postId){
-    // console.log(comment, postId)
     try{
         const res = await axios.post(`${baseUrl}/comments`, {
             content: comment,
@@ -167,6 +176,15 @@ async function getCommentsfromPostId(postId){
     return(filteredComments)
 }
 
+async function updateVoteUser(id ,updateVoteInfo){ 
+    try{
+        const res =  await axios.put(`${baseUrl}/posts/${id}`, updateVoteInfo,{
+            headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+        return res 
+    }catch (error){
+        throw Error(error)
+    }
+}
 
 export{
     getUserProfile,
@@ -179,5 +197,7 @@ export{
     getMultiplePosts,
     addCommentToId,
     getCommentsfromPostId,
-    updatePostChoice
+    updatePostChoice,
+    updateVoteUser,
+    userProfile
 }

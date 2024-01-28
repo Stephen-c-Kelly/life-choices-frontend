@@ -5,6 +5,10 @@ import * as tokenServices from '../../services/tokenService.js'
 
 // import './viewAllPosts.css' // Murad please change the css files.
 
+const baseUrl = `http://localhost:3000`
+//const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
+
+
 const ViewPostComponent = () => {
   const [display, setDisplay] = useState([])
   const [clickedPosts, setClickedPosts] = useState({})
@@ -17,6 +21,7 @@ const ViewPostComponent = () => {
       setThisUser(loggedInUser)
 
       if (loggedInUser){
+        
         const postsData = await protectedServices.getPosts()
         const singlePost = postsData.allPosts.map(post => ({
           ...post,
@@ -39,8 +44,6 @@ const ViewPostComponent = () => {
 
 
   //check if user has liked a post
-// console.log(display.likes.includes(thisUser))
-
   // add like handler
   const likeHandler = async (e, post)=>{
     const id = post._id
@@ -81,12 +84,6 @@ const ViewPostComponent = () => {
   }
 
   const onClick = async (e, post, countType)=> {
-    const currentClickedStatus = clickedPosts[post._id] || {}
-
-
-    if ( currentClickedStatus[countType === "count1" ? "count2" : "count1"]) {
-      return 
-    }
     
     if (post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username)){
       return
@@ -111,14 +108,13 @@ const ViewPostComponent = () => {
 
       console.log("updated count:", addVoteUser.data.updatedPost[countType])
 
-      setClickedPosts(prev => ({
-        ...prev,
-        [post._id]: { ...prev[post._id], [countType]: true }
-      }));
 
       if (countType === 'count1' || countType === 'count2') {
         const button = e.target; // Assuming e.target is the button itself
         button.style.color = 'red'; // Change color as needed
+        button.style.backgroundColor = 'grey'
+
+
       }
     
       setDisplay(currentDisplay =>
@@ -144,7 +140,7 @@ console.log(display)
   {display.map((post, index) =>
   <div key={`post${index}`} className="post-container">
     <div className="post-header">
-      <Link to={`/profile/${post.profileId}`} key={post._id}>
+      <Link to={`/profile/${post.username}`} key={post._id}>
         <small className="username">{`@${post.username}`}</small>
       </Link>
     </div>
@@ -161,11 +157,13 @@ console.log(display)
           <div className="choice-box">
             <button name="count1" className={`choices choice1 ${post.isSelectedCount1 ? 'selected' : ''}`} 
               style={{ 
-                color: post.isSelectedCount1 ? 'red' : 'black' // Change colors as needed
+                color: post.isSelectedCount1 ? 'red' : 'black',
+                backgroundColor: post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) ? 'grey' : null,
+                backgroundColor: post.isSelectedCount1 || post.isSelectedCount2 ? 'grey' : null // Change colors as needed
               }}
               key="choice1" 
-            post={post} data-postid={post._id} onClick={(e) => onClick(e, post, "count1")}
-            disabled={clickedPosts[post._id]?.count1 || clickedPosts[post._id]?.count2 || post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
+              post={post} data-postid={post._id} onClick={(e) => onClick(e, post, "count1")}
+              disabled={ post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
               {post.choice1}
             </button>
             <p  key='choice1-count'className="choice-count1">{post.count1.length}</p>
@@ -180,12 +178,14 @@ console.log(display)
           <div className="choice-box">
             <button className={`choices choice2 ${post.isSelectedCount2 ? 'selected' : ''}`} 
               style={{ 
-                color: post.isSelectedCount2 ? 'red' : 'black' // Change colors as needed
+                color: post.isSelectedCount2 ? 'red' : 'black',
+                backgroundColor: post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) ? 'grey' : null,
+                backgroundColor: post.isSelectedCount1 || post.isSelectedCount2 ? 'grey' : null // Change colors as needed
               }}
               key="choice2"
-            post={post} data-postid={post._id}
-            onClick={(e) => onClick(e, post, "count2")}
-            disabled={clickedPosts[post._id]?.count1 || clickedPosts[post._id]?.count2 || post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
+              post={post} data-postid={post._id}
+              onClick={(e) => onClick(e, post, "count2")}
+              disabled={ post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
               {post.choice2}
             </button>
             <p key='choice2-count' className="choice-count2">{post.count2.length}</p>
