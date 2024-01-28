@@ -2,6 +2,7 @@ import * as protectedServices from '../../services/protectedServices.js'
 import { getUserFromToken } from '../../services/tokenService.js'
 import {Link, useNavigate} from 'react-router-dom'
 import { useState } from "react"
+import './CreatePostComponent.css'
 
 const CreatePost = () => {
     const navigate = useNavigate()
