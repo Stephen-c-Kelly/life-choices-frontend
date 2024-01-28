@@ -22,6 +22,7 @@ const [showCommentField, setShowCommentField]=useState(false)
 useEffect(()=>{
   const fetchComments = async (postId) =>{
     const postComments= await protectedServices.getCommentsfromPostId(postId)
+    postComments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     setComments(postComments)
     setCommentSubmitted(false)
   }
@@ -52,7 +53,6 @@ const handleSubmitNewComment = async e => {
   return (
     <div>
       <ChoiceButtons  />
-      <CommentPosts comments={comments} /> 
       
       <button onClick={toggleAddComment}>Add Comment</button>
         {showCommentField && (
@@ -65,9 +65,10 @@ const handleSubmitNewComment = async e => {
                     placeholder="Write your comment here"
                 />
                 <button type="submit">Submit Comment</button>
-                <button type="cancle" onClick={toggleAddComment}>Never mind</button>
+                <button type="button" onClick={toggleAddComment}>Never mind</button>
             </form>
         )} 
+        <CommentPosts comments={comments} /> 
     </div>
   )
 }
