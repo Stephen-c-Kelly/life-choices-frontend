@@ -24,14 +24,19 @@ useEffect(() => {
       setPost(postData);
       setCountState1(postData.count1.length)
       setCountState2(postData.count2.length)
+
+      if (postData.count1.includes(username) || postData.count2.includes(username)) {
+        setDisableChoiceBtnsForUser(true);
+      }
     } catch (error) {
       console.error("Error fetching post:", error);
     }
   };
   fetchPost();
 }, [ updateTrigger]);
-
-console.lo
+console.log(post, 'test')
+console.log(countState1)
+console.log(countState2)
 
 const handleChoiceClick = async (id, choiceField, username) => {
   setDisableChoiceBtnsForUser(true)
@@ -39,11 +44,11 @@ const handleChoiceClick = async (id, choiceField, username) => {
     await protectedServices.updatePostChoice(id, choiceField, username)
     setUpdateTrigger(prev => prev + 1)
     setClickedButton(choiceField)
-    
   } catch (error) {
     console.error("Error in updating choice:", error);
   } 
 }
+
 return (
   <div>
     {post ? (
