@@ -43,6 +43,7 @@ const handleSubmitNewComment = async e => {
     protectedServices.addCommentToId(comment.content, comment.username, id)
     console.log(`comment added:`, comment)
     setCommentSubmitted(true)
+    toggleAddComment()
   } catch (error){
     throw error
   }
@@ -58,14 +59,15 @@ const handleSubmitNewComment = async e => {
             <form onSubmit={handleSubmitNewComment}>
                 <textarea
                     name="content"
-                    value={comment.content}
+                    // value={comment.content}
                     
                     onChange={handleAddComment}
                     placeholder="Write your comment here"
                 />
                 <button type="submit">Submit Comment</button>
+                <button type="cancle" onClick={toggleAddComment}>Never mind</button>
             </form>
-        )}
+        )} 
     </div>
   )
 }
