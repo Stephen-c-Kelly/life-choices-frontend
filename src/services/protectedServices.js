@@ -2,8 +2,9 @@
 import * as tokenService from './tokenService'
 import axios from 'axios'
 
-const baseUrl = `http://localhost:3000`
-// const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
+ const baseUrl = `http://localhost:3000`
+//const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
+
 
 async function getUserProfile(){
     try {
@@ -135,7 +136,7 @@ async function addCommentToId(comment, username, postId){
     // console.log(comment, postId)
     try{
         const res = await axios.post(`${baseUrl}/comments`, {
-            comment: comment,
+            content: comment,
             username: username,
             postId: postId },
             { 
@@ -148,29 +149,22 @@ async function addCommentToId(comment, username, postId){
     }
 
 }
-    
+
 
 async function getCommentsfromPostId(postId){
-    // try{
-    //     const res = await axios.post(`${baseUrl}/posts/${postId}`)
+    const res = await axios.get(`${baseUrl}/comments`, {
+        headers: { Authorization: `Bearer ${tokenService.getToken()}` }
+    })
+    
+    const response = await getSinglePost(postId)
 
-    //     const requests = arr.map(id=>{
-    //         return axios.get(`${baseUrl}/posts/${id}`, {
-    //             headers: { Authorization: `Bearer ${tokenService.getToken()}` }
-    //         })
-    //     })
-    //     const responses = await Promise.all(requests);
-    //     console.log(`all comments for this post:`, responses)
-        
-    //     return responses.map(res=>res.data.post)
-    //      } catch (error) {
-    //         console.error("Error in getCommentsfromPostId:", error);
-    //         throw error;}
+    const getComments = (arr, ids) => {
+        return arr.filter(item => ids.includes(item._id));
+    }
+    const filteredComments = getComments(res.data.comments, response.commentId)
 
-        
-    // axios call to look through all Profiles and see if they have all comments with this post 
-    // maybe do a promise.all to tie it all together. output as an array of comments
-    // 
+
+    return(filteredComments)
 }
 
 
@@ -185,5 +179,5 @@ export{
     getMultiplePosts,
     addCommentToId,
     getCommentsfromPostId,
-    updatePostChoice,
+    updatePostChoice
 }
