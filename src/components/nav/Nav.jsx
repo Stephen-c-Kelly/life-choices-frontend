@@ -20,24 +20,22 @@ const Nav = (props) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <div className="collapse navbar-collapse justify-content-space-evenly" id="navbarNav">
-          <div className="navbar-nav nav">
-            <div className="nav-item">
-              <Link className="nav-link" to="/profile">Profile</Link>
-            </div>
-            <div className="nav-item">
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/newpost">New Post</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/homepage">Home</Link>
-            </div>
-            <div className="nav-item">
-              <Link className="nav-link" to="/" onClick={handleLogout}>Sign Out</Link>
+          <div className="collapse navbar-collapse justify-content-space-evenly" id="navbarNav">
+            <div className="navbar-nav nav">
+              <div className="nav-item">
+                <Link className="nav-link" to="/profile">Profile</Link>
+              </div>
+              <div className="nav-item">
+                <Link className="nav-link" to="/newpost">New Post</Link>
+              </div>
+              <div className="nav-item">
+                <Link className="nav-link" to="/homepage">Home</Link>
+              </div>
+              <div className="nav-item">
+                <Link className="nav-link" to="/" onClick={handleLogout}>Sign Out</Link>
+              </div>
             </div>
           </div>
-        </div>
       </div>
     </nav>
   );
