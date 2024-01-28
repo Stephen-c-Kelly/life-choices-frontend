@@ -9,7 +9,6 @@ const ProfileComponent = ( props ) => {
     useEffect(()=>{
         const fetchProfile = async () =>{
             const profileData = await protectedServices.singleProfile()
-            console.log(profileData)
             setDisplay(profileData.profile[0].postId)
         }
         fetchProfile()
@@ -21,7 +20,7 @@ const ProfileComponent = ( props ) => {
     useEffect(()=>{
         const fetchPosts = async (display) =>{
             const userPosts= await protectedServices.getMultiplePosts(display)
-            console.log(`user posts are:`, userPosts)
+            userPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             setPosts(userPosts)
         }
         fetchPosts(display)
