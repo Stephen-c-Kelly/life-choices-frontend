@@ -74,7 +74,7 @@ const ViewPostComponent = () => {
       );
 
       if (post.isSelectedCount1 === true){
-          
+        
       }
       
 
