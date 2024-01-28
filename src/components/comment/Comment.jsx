@@ -53,9 +53,8 @@ const handleSubmitNewComment = async e => {
   return (
     <div>
       <ChoiceButtons  />
-      
-      <button onClick={toggleAddComment}>Add Comment</button>
-        {showCommentField && (
+      {!showCommentField? <button onClick={toggleAddComment}>Add Comment</button> : 
+      showCommentField && (
             <form onSubmit={handleSubmitNewComment}>
                 <textarea
                     name="content"
@@ -65,9 +64,9 @@ const handleSubmitNewComment = async e => {
                     placeholder="Write your comment here"
                 />
                 <button type="submit">Submit Comment</button>
-                <button type="button" onClick={toggleAddComment}>Never mind</button>
+                <button type="button" onClick={toggleAddComment}>Nevermind</button>
             </form>
-        )} 
+        ) }
         <CommentPosts comments={comments} /> 
     </div>
   )
