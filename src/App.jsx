@@ -5,6 +5,7 @@ import Nav from './components/nav/Nav.jsx'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './components/profile/ProfileComponent.jsx'
+import UserProfile from './pages/UserProfile.jsx'
 import ViewPost from './pages/ViewPost.jsx'
 import * as authService from './services/authService.js'
 import './App.css'
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/newpost" element={<CreatePost/>}/>
         <Route path="/viewpost/:id" element={<ViewPost user={user}/>}/>
         <Route path="/profile" element={<Profile user={user}/>}/>
+        <Route path="/profile/:id" element={<UserProfile user={user}/>}/>
       </Routes>
     </>
   )
