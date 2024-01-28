@@ -2,7 +2,7 @@
 import * as tokenService from './tokenService'
 import axios from 'axios'
 
- const baseUrl = `http://localhost:3000`
+const baseUrl = `http://localhost:3000`
 //const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
 
 
