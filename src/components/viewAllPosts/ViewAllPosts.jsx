@@ -152,7 +152,7 @@ console.log(display)
   {display.map((post, index) =>
   <div key={`post${index}`} className="post-container">
     <div className="post-header">
-      <Link to={`/profile/${post.profileId}`} key={post._id}>
+      <Link to={`/profile/${post.username}`} key={post._id}>
         <small className="username">{`@${post.username}`}</small>
       </Link>
     </div>

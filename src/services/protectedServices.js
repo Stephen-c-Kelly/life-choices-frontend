@@ -29,6 +29,16 @@ async function singleProfile(){
     }
 }
 
+async function userProfile(user){
+    try{
+        const res = await axios.get(`${baseUrl}/profiles/${user}`,{headers: { Authorization: `Bearer ${tokenService.getToken()}` }})
+        //console.log(res.json(), 'res')
+        return res.data
+    }catch{
+        throw Error
+    }
+}
+
 async function getPosts(){
     try {
         const res = await axios.get(`${baseUrl}/posts`,{
@@ -188,5 +198,6 @@ export{
     addCommentToId,
     getCommentsfromPostId,
     updatePostChoice,
-    updateVoteUser
+    updateVoteUser,
+    userProfile
 }
