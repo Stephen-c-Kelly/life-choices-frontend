@@ -1,11 +1,9 @@
+import ProfileComponent from '../components/ProfileComponent'
 
-import ProfileComponent from "../components/profile/ProfileComponent";
-
-
-const ProfilePage = (user) => {
+const ProfilePage = () => {
   return (
     <div style={{ marginTop: '70px' }}> {/* Adjust the value based on your navbar height */}
-      <h1><ProfileComponent user={user.props}/></h1>
+      <h1><ProfileComponent/></h1>
       {/* Other profile content */}
     </div>
   );

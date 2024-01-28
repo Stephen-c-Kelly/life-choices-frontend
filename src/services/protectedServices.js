@@ -5,6 +5,7 @@ import axios from 'axios'
  const baseUrl = `http://localhost:3000`
 //const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
 
+
 async function getUserProfile(){
     try {
         const res = await axios.get(`${baseUrl}/profiles`, {
@@ -119,9 +120,9 @@ async function createPost(updateInfo){
     }
 }
 
-async function deletePost(id){
+async function deletePost(profileId,postId){
     try {
-        const res = await axios.delete(`${baseUrl}/posts/${id}`, {
+        const res = await axios.delete(`${baseUrl}/posts/${profileId}/${postId}`, {
             headers: { Authorization: `Bearer ${tokenService.getToken()}` }
         })
 
@@ -149,6 +150,7 @@ async function addCommentToId(comment, username, postId){
 
 }
 
+
 async function getCommentsfromPostId(postId){
     const res = await axios.get(`${baseUrl}/comments`, {
         headers: { Authorization: `Bearer ${tokenService.getToken()}` }
@@ -160,6 +162,7 @@ async function getCommentsfromPostId(postId){
         return arr.filter(item => ids.includes(item._id));
     }
     const filteredComments = getComments(res.data.comments, response.commentId)
+
 
     return(filteredComments)
 }

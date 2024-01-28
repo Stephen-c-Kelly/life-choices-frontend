@@ -16,6 +16,7 @@ const ViewSinglePost = (props) => {
   }
   )
   const user = getUserFromToken()
+  console.log(user,'user')
 
 
   useEffect(()=>{
@@ -61,7 +62,7 @@ const ViewSinglePost = (props) => {
 const handleDelete = async (e) =>{
   e.preventDefault()
   try {
-    const remove = await deletePost(props.id)
+    const remove = await deletePost(user.profileId,props.id)
     navigate('/profile')
   } catch (error) {
     throw error
@@ -131,10 +132,13 @@ const handleDelete = async (e) =>{
       <div>
         <p>{post? post.username  : 'Loading'}</p>
       </div>
-          {!isEditMode && (
-            <button onClick={toggleEdit}>Edit</button>
-          )}
-          <button onClick={handleDelete}>Delete</button>
+      {post && post.profileId === user.profileId && (
+      <>
+      {!isEditMode && <button onClick={toggleEdit}>Edit</button>}
+      <button onClick={handleDelete}>Delete</button>
+      </>
+      )}
+         
         </>
       ) : (
         <p>Loading...</p>
