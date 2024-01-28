@@ -12,10 +12,12 @@ const CommentComponent = (props) => {
   const userInfo = getUserFromToken()
   const {id} = useParams() 
 const [comments, setComments]=useState([])
-const [comment, setComment]=useState(false)
+const [comment, setComment]=useState({
+  content: '',
+  username: userInfo.username
+})
 const [commentSubmitted, setCommentSubmitted] = useState(false)
 const [showCommentField, setShowCommentField]=useState(false)
-
 
 useEffect(()=>{
   const fetchComments = async (postId) =>{
@@ -26,8 +28,6 @@ useEffect(()=>{
 
   fetchComments(id)
 }, [id, commentSubmitted])
-// used to say comments too, which triggered the infinite loop
-
 
 const toggleAddComment = () => {
   setShowCommentField(!showCommentField)
@@ -51,14 +51,15 @@ const handleSubmitNewComment = async e => {
   return (
     <div>
       <ChoiceButtons  />
-      comments.length ? <CommentPosts comments={comments}/> :
-      <div>no comments yet</div>
+      <CommentPosts comments={comments} /> 
+      
       <button onClick={toggleAddComment}>Add Comment</button>
         {showCommentField && (
             <form onSubmit={handleSubmitNewComment}>
                 <textarea
                     name="content"
                     value={comment.content}
+                    
                     onChange={handleAddComment}
                     placeholder="Write your comment here"
                 />
