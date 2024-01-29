@@ -102,7 +102,7 @@ const formatDate = (created)=>{
                 />
               </div>
               <button type="submit">Update</button>
-              <button type="button" onClick={toggleEdit}>Cancel</button>
+              <button type="button" onClick={toggleEdit}>Nevermind</button>
             </form>
           ) : (
             <>

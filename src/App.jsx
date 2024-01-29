@@ -7,6 +7,7 @@ import Signup from './pages/Signup'
 import Profile from './components/profile/ProfileComponent.jsx'
 import UserProfile from './pages/UserProfile.jsx'
 import ViewPost from './pages/ViewPost.jsx'
+import ProtectedRoute from './components/protectedRoutes/ProtectedRoutes.jsx'
 import * as authService from './services/authService.js'
 import './App.css'
 import CreatePost from './pages/CreatePost.jsx'
@@ -14,6 +15,7 @@ import { getUserFromToken } from './services/tokenService.js'
 
 const App = () => {
   const [user, setUser] = useState()
+  const [loggedIn, setLoggedIn] = useState(authService.getUser())
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -42,14 +44,40 @@ const App = () => {
     <>
       <Nav user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/homepage" element={<Homepage/>}/>
         <Route path="/" element={<Login handleSignupOrLogin={handleSignupOrLogin}/>}/>
         <Route path="/signup" element={<Signup/>}/>
-        <Route path="/newpost" element={<CreatePost/>}/>
-        <Route path="/viewpost/:id" element={<ViewPost user={user}/>}/>
-        <Route path="/profile" element={<Profile user={user}/>}/>
-        <Route path="/profile/:id" element={<UserProfile user={user}/>}/>
-      </Routes>
+      
+      <Route 
+      path="/homepage" 
+      element={<ProtectedRoute loggedIn={loggedIn}>
+      <Homepage/>
+      </ProtectedRoute>
+      }/>
+      <Route 
+        path="/newpost" 
+        element={
+        <ProtectedRoute loggedIn={loggedIn}>
+        <CreatePost/>
+        </ProtectedRoute>}/>
+        <Route 
+        path="/viewpost/:id" 
+        element={
+        <ProtectedRoute loggedIn={loggedIn}>
+        <ViewPost user={user}/>
+        </ProtectedRoute>}/>
+        <Route 
+        path="/profile" 
+        element={
+        <ProtectedRoute loggedIn={loggedIn}>
+        <Profile user={user}/>
+        </ProtectedRoute>}/>
+        <Route 
+        path="/profile/:id" 
+        element={
+        <ProtectedRoute loggedIn={loggedIn}>
+        <UserProfile user={user}/>
+        </ProtectedRoute>}/>
+        </Routes>
     </>
   )
 }

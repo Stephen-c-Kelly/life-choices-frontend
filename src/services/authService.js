@@ -1,7 +1,7 @@
 import * as tokenService from './tokenService.js'
 
-// const baseUrl = `http://localhost:3000`
-const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
+const baseUrl = `http://localhost:3000`
+// const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
 
 function getUser(){
     return tokenService.getUserFromToken()
