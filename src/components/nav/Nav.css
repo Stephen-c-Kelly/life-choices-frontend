@@ -40,9 +40,12 @@
 @media (max-width: 991px) {
   .navbar-nav {
     flex-direction: column;
+    justify-content: flex-end; 
+    background-color: #deb786;  
   }
 
   .nav-link {
+    text-align: right; 
     margin-right: 0;
     margin-bottom: 10px;
   }

@@ -4,10 +4,9 @@ import * as protectedServices from '../../services/protectedServices'
 import * as tokenServices from '../../services/tokenService.js'
 
 
-// import './viewAllPosts.css' // Murad please change the css files.
-
 //  const baseUrl = `http://localhost:3000`
 const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
+
 
 
 const ViewPostComponent = () => {
