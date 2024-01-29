@@ -32,7 +32,7 @@ const ProfileComponent = ( props ) => {
     console.log(display, 'display')
     // ['65b3f21b1cc3d7e50837925d', '65b3f2401cc3d7e508379266']
     return (
-        <main className='container'>
+        <main className='container1'>
             <h1>
                 {props.user ? `Hello, ${props.user.username}` : 'Loading...'}
             </h1>

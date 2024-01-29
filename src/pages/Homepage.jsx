@@ -1,5 +1,5 @@
 import ViewAllPostComponent from '../components/viewAllPosts/ViewAllPosts'
-
+import '../components/viewAllPosts/ViewAllPosts.css'
 
 const Homepage = () => {
   return (

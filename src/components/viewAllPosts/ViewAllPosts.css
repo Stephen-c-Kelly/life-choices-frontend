@@ -1,21 +1,13 @@
 body{
   background-color: white;
-  height: 100vh;
 }
-
-.container{
-  overflow: scroll;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
 
 /* General styling for post container */
 .post-container {
     margin-bottom: 20px;
     padding: 10px;
-    border: 1px solid #ccc;
-    background-color: lightgray;
+    border: 2px solid #ccc;
+    background-color: skyblue;
     border-radius: 8px;
   }
   
@@ -32,13 +24,7 @@ body{
     flex-direction: column;
     align-items: center;
   }
-  
-  /* Styling for the images in choice containers */
-  .choices-container img {
-    max-width: 300px; /* adjust as per your need */
-    height: auto;
-    margin-right: 10px;
-  }
+
 
   /*  to make image in a fixed size frame */
   .image-container {
@@ -105,6 +91,6 @@ body{
 }
 
 .username {
-  margin-right: 10px; /* Adjust as needed */
-  /* other styling as needed */
+  font-size: 1.2rem;
+  color: black;
 }
