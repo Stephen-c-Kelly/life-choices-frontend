@@ -4,15 +4,13 @@ import * as protectedServices from '../../services/protectedServices'
 import * as tokenServices from '../../services/tokenService.js'
 
 
+//  const baseUrl = `http://localhost:3000`
+const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
 
-
-  const baseUrl = `http://localhost:3000`
-// const baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
 
 
 const ViewPostComponent = () => {
   const [display, setDisplay] = useState([])
-  const [clickedPosts, setClickedPosts] = useState({})
   const [thisUser, setThisUser] =useState(null)
 
 
@@ -40,8 +38,6 @@ const ViewPostComponent = () => {
 
   }, [])
 // console.log(thisUser)
-
-
 
 
   //check if user has liked a post
@@ -73,10 +69,6 @@ const ViewPostComponent = () => {
             : p,
         )
       );
-
-      if (post.isSelectedCount1 === true){
-        
-      }
       
 
     }catch (error) {
@@ -85,6 +77,7 @@ const ViewPostComponent = () => {
   }
 
   const onClick = async (e, post, countType) => {
+
     // Prevent further voting if the user has already voted
     if (post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username)) {
       return;
@@ -98,10 +91,8 @@ const ViewPostComponent = () => {
         await axios.put(`${baseUrl}/posts/${post._id}`, updateVoteInfo, {
           headers: { Authorization: `Bearer ${tokenServices.getToken()}` }
         });
-  
-        // Create a new post object with the updated vote
-        const newPost = { ...post };
-        newPost[countType].push(thisUser.username);
+        
+        
   
         // Update the local state to reflect the new vote
         setDisplay(currentDisplay =>
@@ -120,7 +111,7 @@ const ViewPostComponent = () => {
     }
   }
   
-console.log(display)
+// console.log(display)
 
 
   return (

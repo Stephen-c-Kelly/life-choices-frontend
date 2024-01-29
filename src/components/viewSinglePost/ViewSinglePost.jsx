@@ -3,6 +3,8 @@ import CommentComponent from '../comment/Comment.jsx'
 import { useState, useEffect} from 'react'
 import { getUserFromToken } from '../../services/tokenService.js'
 import { useNavigate } from 'react-router'
+import './ViewSinglePost.css'
+
 
 
 const ViewSinglePost = (props) => {
@@ -77,7 +79,7 @@ const formatDate = (created)=>{
   return `${month}/${day}/${year}`
 }
   return (
-    <div>
+    <div style={{width: '100%'}}>
       {post ? (
         <>
           {isEditMode ? (
@@ -106,35 +108,45 @@ const formatDate = (created)=>{
             </form>
           ) : (
             <>
-              <div>
-                <h1>{post.title}</h1>
+            <div className="container2">
+              <div className="post-user-info">
+                <div>
+                  <p>{post? post.username  : 'Loading'}</p>
+                </div>
+                <div>
+                  <h1>{post.title}</h1>
+                </div>
+                <div>
+                  <p>{post? formatDate(post.updatedAt) : 'Loading'}</p>
+                </div>
               </div>
               <div>
                 <p>{post.content}</p>
               </div>
+              <div>
+                <p>{post? post.img : 'Loading'}</p>
+              </div>
+              <CommentComponent props={props} />
+            </div>
+            <div className="btns-container">
+              {post && post.profileId === user.profileId && (
+              <>
+              <div className="btns">
+                {!isEditMode && <button onClick={toggleEdit}>Edit</button>}
+              </div>
+              <div className="btns">
+                <button onClick={handleDelete}>Delete</button>
+              </div>
+              </>
+              )}
+            </div>
             </>
           )}
-      <div>
-        <p>{post? post.username  : 'Loading'}</p>
-      </div>
-      <div>
-        <p>{post? formatDate(post.updatedAt) : 'Loading'}</p>
-      </div>
-      <div>
-        <p>{post? post.img : 'Loading'}</p>
-      </div>
-      {post && post.profileId === user.profileId && (
-      <>
-      {!isEditMode && <button onClick={toggleEdit}>Edit</button>}
-      <button onClick={handleDelete}>Delete</button>
-      </>
-      )}
-         
         </>
       ) : (
         <p>Loading...</p>
       )}
-      <CommentComponent props={props} />
+      
     </div>
   )
 }
