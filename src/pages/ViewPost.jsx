@@ -4,7 +4,7 @@ import ViewSinglePost from '../components/viewSinglePost/ViewSinglePost'
 const ViewPost = (user) => {
   const {id} = useParams()
   return (
-    <div>
+    <div className='container1'>
       <ViewSinglePost user={user} id={id}/>
     </div>
   )

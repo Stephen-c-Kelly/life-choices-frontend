@@ -3,6 +3,8 @@ import CommentComponent from '../comment/Comment.jsx'
 import { useState, useEffect} from 'react'
 import { getUserFromToken } from '../../services/tokenService.js'
 import { useNavigate } from 'react-router'
+import './ViewSinglePost.css'
+
 
 
 const ViewSinglePost = (props) => {
@@ -125,11 +127,11 @@ const formatDate = (created)=>{
       </div>
       {post && post.profileId === user.profileId && (
       <>
-      {!isEditMode && <button onClick={toggleEdit}>Edit</button>}
-      <button onClick={handleDelete}>Delete</button>
+      {!isEditMode && <button className='btn' onClick={toggleEdit}>Edit</button>}
+      <button className='btn' onClick={handleDelete}>Delete</button>
       </>
       )}
-         
+
         </>
       ) : (
         <p>Loading...</p>
