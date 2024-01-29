@@ -4,6 +4,12 @@
 # LifeChoices: a crowd-sourced decision-making app
 This app will help people make life choices (big and small) by allowing friends to comment and vote on a choice.  
 
+# Team
+Lesley Rotonto - Frontend Development, React Architecture, Authentication
+Shan Xu - Backend Development, Authentication
+Stephen Kelly - Github Owner, Scrum Master, Frontend Development
+Murad Mansour - Frontend Development, CSS Styling
+
 ## Project Description 
 "Live Choices" is a MERN stack web application that helps users post choices that other users can vote and discuss.  
 
