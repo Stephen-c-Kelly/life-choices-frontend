@@ -12,7 +12,7 @@ After a landing page that lists all choices, users can review choices, vote on t
 Should I move to Canada or Mexico?  Should I order Chinese or Burgers?  Finally we can make the right choice!
 
 ## Technologies and Libraries Used
-This application is built using Node/Express/React/MongoDB using a RESTful API design, deployed via Heroku.
+This application is built using Node/Express/React/MongoDB using a RESTful API design, deployed via Netlify.
 
 FrontEnd Technologies used
 -- Node.js
