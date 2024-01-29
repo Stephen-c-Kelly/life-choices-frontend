@@ -1,7 +1,7 @@
 
 ![Life Choices Mockup](https://github.com/Stephen-c-Kelly/life-choices-server/assets/149907841/49a55579-1343-4725-adf7-b521cfe34dae)
 
-# LifeChoices: a crowd-sourced decision-making app
+# LifeChoices: a crowd-sourced decision making app
 This app will help people make life choices (big and small) by allowing friends to comment and vote on a choice.  
 
 # Team
