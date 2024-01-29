@@ -84,6 +84,12 @@ const ViewPostComponent = () => {
   }
 
   const onClick = async (e, post, countType)=> {
+    const currentClickedStatus = clickedPosts[post._id] || {}
+
+
+    if ( currentClickedStatus[countType === "count1" ? "count2" : "count1"]) {
+      return 
+    }
     
     if (post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username)){
       return
@@ -107,7 +113,10 @@ const ViewPostComponent = () => {
     
 
       console.log("updated count:", addVoteUser.data.updatedPost[countType])
-
+      setClickedPosts(prev => ({
+        ...prev,
+        [post._id]: { ...prev[post._id], [countType]: true }
+      }));
 
       if (countType === 'count1' || countType === 'count2') {
         const button = e.target; // Assuming e.target is the button itself
@@ -163,7 +172,7 @@ console.log(display)
               }}
               key="choice1" 
               post={post} data-postid={post._id} onClick={(e) => onClick(e, post, "count1")}
-              disabled={ post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
+              disabled={ clickedPosts[post._id]?.count1 || clickedPosts[post._id]?.count2 ||  post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
               {post.choice1}
             </button>
             <p  key='choice1-count'className="choice-count1">{post.count1.length}</p>
@@ -185,7 +194,7 @@ console.log(display)
               key="choice2"
               post={post} data-postid={post._id}
               onClick={(e) => onClick(e, post, "count2")}
-              disabled={ post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
+              disabled={ clickedPosts[post._id]?.count1 || clickedPosts[post._id]?.count2 || post.count1.includes(thisUser.username) || post.count2.includes(thisUser.username) }>
               {post.choice2}
             </button>
             <p key='choice2-count' className="choice-count2">{post.count2.length}</p>
