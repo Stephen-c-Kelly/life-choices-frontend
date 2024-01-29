@@ -2,12 +2,8 @@
 import * as tokenService from './tokenService'
 import axios from 'axios'
 
-
-
 // const baseUrl = `http://localhost:3000`
 baseUrl = `https://lifechoices-a9061aaee4a7.herokuapp.com`
-
-
 
 
 async function getUserProfile(){
