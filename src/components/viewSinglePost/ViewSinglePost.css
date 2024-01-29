@@ -1,1 +1,26 @@
+.btns-container{
+  display: flex;
+  justify-content: space-around;
+  width:100%;
+}
 
+.btns{
+  width: 15%;
+}
+
+.container2{
+  background-color: #C4A484;
+  border: 2px solid brown;
+
+}
+
+.container2 button{
+  width: 15%;
+}
+
+.post-user-info{
+  display: flex;
+  justify-content: space-around;
+  margin-left: 50px;
+  padding: 5px;
+}
